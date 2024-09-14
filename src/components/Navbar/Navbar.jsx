@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Navbar.css";
 import { Nav, Navbar as NavbarBS, Container } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleProjectsClick = () => {
+    if (location.pathname === "/") {
+      document.getElementById("projects").scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/", { state: { scrollToProjects: true } });
+    }
+  };
+
+  useEffect(() => {
+    if (location.state?.scrollToProjects) {
+      document.getElementById("projects").scrollIntoView({ behavior: "smooth" });
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location, navigate]);
 
   return (
     <>
@@ -14,9 +30,9 @@ export default function Navbar() {
           <NavbarBS.Toggle aria-controls="navbarNav" />
           <NavbarBS.Collapse id="navbarNav" className="justify-content-end">
             <Nav>
-              {location.pathname !== "/" && <Nav.Link href="/">Home</Nav.Link>}
+              <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href={location.pathname === "/about" ? "#about" : "/about"}>About</Nav.Link>
-              {location.pathname === "/" && <Nav.Link href="#projects">Projects</Nav.Link>}
+              <Nav.Link onClick={handleProjectsClick}>Projects</Nav.Link>
               <Nav.Link href={location.pathname === "/contact" ? "#contactForm" : "/contact"}>Contact</Nav.Link>
             </Nav>
           </NavbarBS.Collapse>

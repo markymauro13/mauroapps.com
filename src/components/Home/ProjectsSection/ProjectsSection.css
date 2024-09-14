@@ -15,17 +15,18 @@
   transform: translateY(-10px);
 }
 
-.card-button {
-  background-color: #007bff;
-  border-color: #007bff;
+.btn-light {
+  background-color: #fff;
+  color: #007bff;
+  border-color: #fff;
   border-radius: 30px;
   padding: 12px 25px;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
-.card-button:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
+.btn-light:hover {
+  background-color: #f8f9fa;
+  color: #0056b3;
   transform: scale(1.05);
 }

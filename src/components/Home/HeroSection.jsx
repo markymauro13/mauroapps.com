@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Container } from "react-bootstrap";
-import "./HeroSection.css";
 
 export default function HeroSection() {
   return (

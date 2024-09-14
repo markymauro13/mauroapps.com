@@ -10,7 +10,7 @@ export default function Footer() {
           <p>&copy; 2024 Mauro Apps LLC. All rights reserved.</p>
           <p>
             Email:{" "}
-            <a href="mailto:markymauro@gmail.com" className="text-primary text-white">
+            <a href="mailto:markymauro@gmail.com" className="text-primary text-light">
               markymauro@gmail.com
             </a>
           </p>
