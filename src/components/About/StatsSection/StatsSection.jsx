@@ -33,19 +33,19 @@ export default function StatsSection() {
         <Container>
           <h2 className="text-center mb-5">Our Impact</h2>
           <Row className="justify-content-center">
-            <Col className="col-md-4 mb-4">
+            <Col md="4" className="mb-4">
               <div className="stat-card">
                 <div className="stat-number">{downloadCount}</div>
                 <p className="mb-0">App Downloads</p>
               </div>
             </Col>
-            <Col className="col-md-4 mb-4">
+            <Col md="4" className="mb-4">
               <div className="stat-card">
                 <div className="stat-number">{userCount}</div>
                 <p className="mb-0">Active Users</p>
               </div>
             </Col>
-            <Col className="col-md-4 mb-4">
+            <Col md="4" className="mb-4">
               <div className="stat-card">
                 <div className="stat-number">{appCount}</div>
                 <p className="mb-0">Apps Published</p>

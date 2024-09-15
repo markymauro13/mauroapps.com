@@ -11,7 +11,7 @@ export default function Contact() {
       <div className="contact-section">
         <Container>
           <Row className="justify-content-center">
-            <Col className="col-lg-8">
+            <Col lg="8">
               <Form id="contactForm" className="contact-form">
                 <Form.Group className="mb-3" controlId="formName">
                   <Form.Label>Name</Form.Label>

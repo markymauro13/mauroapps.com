@@ -8,7 +8,7 @@ export default function AboutSection() {
       <div className="about-section">
         <Container>
           <Row className="justify-content-center">
-            <Col className="col-lg-8">
+            <Col lg="8">
               <p className="lead mb-4">
                 Founded by Mark Mauro in 2024, MauroApps is a dynamic mobile software company specializing in innovative SaaS products for the iOS platform.
               </p>
