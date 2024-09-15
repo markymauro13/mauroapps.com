@@ -29,7 +29,9 @@ export default function Contact() {
                   <Form.Label>Message</Form.Label>
                   <Form.Control required as="textarea" style={{ height: "134px" }} />
                 </Form.Group>
-                <Button variant="primary">Send Message</Button>
+                <Button variant="primary" type="submit">
+                  Send Message
+                </Button>
               </Form>
             </Col>
           </Row>
