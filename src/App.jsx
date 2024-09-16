@@ -27,7 +27,7 @@ export default function App() {
   }
 
   return (
-    <Router basename="/mauroapps.com">
+    <Router>
       <ScrollToHash />
       <Navbar />
       <Routes>
