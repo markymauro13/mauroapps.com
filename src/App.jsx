@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
-import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
@@ -27,7 +27,7 @@ export default function App() {
   }
 
   return (
-    <Router>
+    <Router basename="/mauroapps.com">
       <ScrollToHash />
       <Navbar />
       <Routes>
