@@ -1,0 +1,32 @@
+.projects-section {
+  padding: 80px 20px;
+  background-color: #fff;
+}
+
+.project-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+}
+
+.btn-light {
+  background-color: #fff;
+  color: #007bff;
+  border-color: #fff;
+  border-radius: 30px;
+  padding: 12px 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-light:hover {
+  background-color: #f8f9fa;
+  color: #0056b3;
+  transform: scale(1.05);
+}
