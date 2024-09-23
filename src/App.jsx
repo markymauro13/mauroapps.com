@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
+import Solutions from "./components/Solutions/Solutions";
 
 export default function App() {
   // Helper component to handle scrolling to hash
@@ -32,6 +33,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/solutions" element={<Solutions />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
