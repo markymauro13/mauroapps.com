@@ -1,11 +1,11 @@
 import React from "react";
 import SolutionsHero from "./SolutionsHero";
-import AboutSection from "./SolutionSection/AboutSection";
+import SolutionsAbout from "./SolutionSection/SolutionsAbout";
 export default function About() {
   return (
     <>
       <SolutionsHero />
-      <AboutSection />
+      <SolutionsAbout />
     </>
   );
 }
