@@ -20,9 +20,9 @@ export default function Navbar() {
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to={location.pathname === "/solutions" ? "#solutions" : "/solutions"}>
+              {/* <Nav.Link as={Link} to={location.pathname === "/solutions" ? "#solutions" : "/solutions"}>
                 Solutions
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link as={Link} to={location.pathname === "/about" ? "#about" : "/about"}>
                 About
               </Nav.Link>
