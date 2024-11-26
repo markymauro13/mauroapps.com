@@ -5,7 +5,7 @@ import StatsSection from "./StatsSection/StatsSection";
 export default function About() {
   return (
     <>
-      <AboutHero />
+      {/* <AboutHero /> */}
       <AboutSection />
       <StatsSection />
     </>

@@ -1,12 +1,12 @@
 .stats-section {
-  padding: 80px 20px;
-  background-color: #f8f9fa;
+  padding: 60px 20px;
+  background-color: #f8f8f8;
 }
 
 .stat-card {
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   padding: 30px;
   text-align: center;
   transition: transform 0.3s ease;
@@ -19,5 +19,10 @@
 .stat-number {
   font-size: 3rem;
   font-weight: 700;
-  color: #007bff;
+  color: #000000;
+}
+
+.stat-card p {
+  color: #404040;
+  font-weight: 500;
 }
