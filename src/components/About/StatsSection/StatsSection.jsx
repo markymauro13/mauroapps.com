@@ -24,7 +24,7 @@ export default function StatsSection() {
 
     animateValue(setDownloadCount, 0, 100, 2000);
     animateValue(setUserCount, 0, 200, 2000);
-    animateValue(setAppCount, 0, 3, 2000);
+    animateValue(setAppCount, 0, 1, 2000);
   }, []);
 
   return (

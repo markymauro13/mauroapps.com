@@ -3,6 +3,7 @@ import "./Navbar.css";
 import { Nav, Navbar as NavbarBS, Container } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
+import logo from "../../imgs/logo.png";
 
 export default function Navbar() {
   const location = useLocation();
@@ -12,11 +13,17 @@ export default function Navbar() {
       <NavbarBS expand="lg" className="navbar-light">
         <Container fluid>
           <NavbarBS.Brand as={Link} to="/">
-            MauroApps.com
+            <img 
+              src={logo} 
+              alt="Mauro Apps Logo" 
+              className="navbar-logo" 
+              width="125" 
+              height="50"
+            />
           </NavbarBS.Brand>
           <NavbarBS.Toggle aria-controls="navbarNav" />
-          <NavbarBS.Collapse id="navbarNav" className="justify-content-end">
-            <Nav>
+          <NavbarBS.Collapse id="navbarNav">
+            <Nav className="ms-auto">
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
