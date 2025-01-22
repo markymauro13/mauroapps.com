@@ -16,9 +16,7 @@ export default function Navbar() {
             <img 
               src={logo} 
               alt="Mauro Apps Logo" 
-              className="navbar-logo" 
-              width="125" 
-              height="50"
+              className="navbar-logo"
             />
           </NavbarBS.Brand>
           <NavbarBS.Toggle aria-controls="navbarNav" />
