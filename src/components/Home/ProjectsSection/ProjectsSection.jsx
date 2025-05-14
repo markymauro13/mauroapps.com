@@ -6,7 +6,7 @@ export default function ProjectsSection() {
   return (
     <>
       <div className="projects-section" id="projects">
-        <Container>
+        {/* <Container>
           <h2 className="text-center mb-5">Our Mobile SaaS Projects</h2>
           <Row className="row justify-content-center">
             <Col md="6" lg="4" className="mb-4">
@@ -34,7 +34,7 @@ export default function ProjectsSection() {
               </Card>
             </Col>
           </Row>
-        </Container>
+        </Container> */}
       </div>
     </>
   );
