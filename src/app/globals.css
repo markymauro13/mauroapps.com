@@ -126,28 +126,6 @@ body {
   transform: translateY(-2px);
 }
 
-.card-button,
-.cta-button,
-.btn-primary {
-  background: #000000;
-  color: white;
-  border: 2px solid #000000;
-  border-radius: 30px;
-  padding: 0.8rem 2rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-}
-
-.card-button:hover,
-.cta-button:hover,
-.btn-primary:hover {
-  background: transparent;
-  color: #000000;
-  border-color: #000000;
-  transform: translateY(-2px);
-}
-
 .card {
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.2);
