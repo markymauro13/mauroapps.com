@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./StatsSection.css";

@@ -9,15 +9,16 @@ export default function AboutSection() {
         <Container>
           <Row className="justify-content-center">
             <Col lg="8">
-              <h2 className="mb-4">
-                Software Solutions for SMBs
-              </h2>
+              <h2 className="mb-4">Software Solutions for SMBs</h2>
               <p className="mb-4">
-                At Mauro Apps LLC, we specialize in architecting and deploying tailor-made software solutions catered to your specifications.
-                Every business has different needs which is why we take the time to build a relationship to understand business processes & end goals so we can craft the software your business needs.
+                At Mauro Apps LLC, we specialize in architecting and deploying tailor-made software
+                solutions catered to your specifications. Every business has different needs which
+                is why we take the time to build a relationship to understand business processes &
+                end goals so we can craft the software your business needs.
               </p>
               <p>
-                We work closely with your team to produce stunning solutions that not only fix your problems but continue to scale with your business as it grows. 
+                We work closely with your team to produce stunning solutions that not only fix your
+                problems but continue to scale with your business as it grows.
               </p>
 
               <p>Whether your business needs:</p>

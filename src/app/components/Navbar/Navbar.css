@@ -25,7 +25,7 @@
 }
 
 .navbar-nav .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;
@@ -60,15 +60,25 @@
 }
 
 @keyframes shake {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-10deg); }
-  50% { transform: rotate(10deg); }
-  75% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .nav-link {
-  color: #1D1D1F !important;
+  color: #1d1d1f !important;
   font-weight: 500;
   padding: 0.35rem 0.6rem !important;
   font-size: 0.95rem;
@@ -83,7 +93,7 @@
   .navbar-light {
     padding: 0.25rem 1rem;
   }
-  
+
   .navbar-brand {
     margin-bottom: 0.25rem;
   }

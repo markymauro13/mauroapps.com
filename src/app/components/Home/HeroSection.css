@@ -69,7 +69,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -82,12 +83,12 @@
     flex-direction: column;
     text-align: center;
   }
-  
+
   .hero-title {
     font-size: 3.5rem;
   }
-  
+
   .floating-frame {
     width: 100%;
   }
-} 
+}
