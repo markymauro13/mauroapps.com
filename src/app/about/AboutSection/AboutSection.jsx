@@ -1,5 +1,5 @@
-import { Col, Container, Row } from "react-bootstrap";
 import Image from "next/image"; // Import the Image component
+import { Col, Container, Row } from "react-bootstrap";
 import "./AboutSection.css";
 export default function AboutSection() {
   return (

@@ -1,15 +1,15 @@
 // app/layout.js
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS globally
-import "./globals.css"; // Import global styles
 import { Poppins } from "next/font/google";
+import "./globals.css"; // Import global styles
 
-import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar/Navbar";
 import ScrollHandler from "./components/ScrollHandler";
 
 // Optional: Define metadata for your application
 export const metadata = {
-  title: "My Next.js Application",
+  title: "MauroApps.com - Innovative Mobile SaaS Solutions",
   description: "Converted from CRA",
 };
 

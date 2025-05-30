@@ -1,8 +1,8 @@
 // components/ScrollHandler.js
 "use client"; // This component uses client-side hooks and browser APIs
 
-import { useEffect } from "react";
 import { usePathname } from "next/navigation"; // To detect route changes
+import { useEffect } from "react";
 
 export default function ScrollHandler() {
   const pathname = usePathname(); // Get the current path
