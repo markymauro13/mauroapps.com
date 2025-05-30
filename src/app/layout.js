@@ -1,8 +1,6 @@
 // app/layout.js
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS globally
 import "./globals.css"; // Import global styles
-import "./index.css"; // Import any additional styles
-import "./styles.css"; // Import custom styles
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";

@@ -1,44 +1,178 @@
+/* === CSS Variables and Base Styles === */
+:root {
+  --primary-gradient: linear-gradient(45deg, #000000, #404040);
+  --surface-color: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #404040;
+  --accent-color: #000000;
+  --background-color: #f5f5f7;
+}
+
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--background-color);
+  color: var(--text-primary);
 }
 
-.content-wrapper {
-  text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #007bff, #00c6ff);
-  color: #fff;
+/* === Typography === */
+.main-title,
+.contact-title,
+.about-title,
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+  color: var(--text-primary);
 }
 
-.subtitle {
-  font-size: 1.5rem;
-  margin-bottom: 50px;
+.subtitle,
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
   opacity: 0.9;
 }
 
-.main-title {
-  font-size: 3.5rem;
-  margin-bottom: 20px;
-  font-weight: 700;
+/* === Shared Layout Styles === */
+.content-wrapper,
+.hero-wrapper {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--primary-gradient),
+    radial-gradient(circle at top right, rgba(0, 0, 0, 0.02), transparent),
+    radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.02), transparent);
+  color: white;
 }
 
+/* === Hero Section === */
+.hero-wrapper {
+  min-height: 60vh;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.hero-button {
+  background: var(--accent-color);
+  color: white;
+  border: 2px solid var(--accent-color);
+  border-radius: 30px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.hero-button:hover {
+  background: transparent;
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+/* === Button Styles (Shared) === */
+.card-button,
+.cta-button,
+.btn-primary {
+  background: var(--accent-color);
+  color: white;
+  border: 2px solid var(--accent-color);
+  border-radius: 30px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.card-button:hover,
+.cta-button:hover,
+.btn-primary:hover {
+  background: transparent;
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+/* === Modern Card Styles === */
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* === Gradient Text === */
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* === Animations === */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.8s ease forwards;
+}
+
+/* === Scrollbar Styles === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #ff6b6b88, #4ecdc488);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+}
+
+/* === Selection Highlight === */
+::selection {
+  background: #4ecdc4;
+  color: white;
+}
+
+/* === Responsive Adjustments === */
 @media (max-width: 768px) {
-  .main-title {
-    font-size: 2.5rem;
+  .content-wrapper,
+  .hero-wrapper {
+    padding: 3rem 1rem;
   }
 
-  .subtitle {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .main-title {
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
+  .card {
+    margin: 1rem;
   }
 }
