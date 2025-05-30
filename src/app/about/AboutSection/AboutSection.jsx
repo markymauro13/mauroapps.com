@@ -15,6 +15,7 @@ export default function AboutSection() {
                   className="about-logo"
                   width={80}
                   height={80}
+                  unoptimized
                 />
               </div>
 
