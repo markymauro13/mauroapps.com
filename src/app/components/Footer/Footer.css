@@ -1,19 +1,15 @@
-/* Reset some defaults */
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+body,
+html {
+  height: 100vh !important;
 }
 
-body {
-  display: grid;
-  grid-template-rows: auto auto auto; /* Header (auto), Main content (1fr), Footer (auto) */
-  min-height: 100vh;
+#mainContainer {
+  min-height: calc(100vh - 120px) !important;
 }
 
 footer {
-  padding: 30px 0;
+  padding: 25px 0px 25px 0px;
+  height: 120px;
   background-color: #000000;
   color: #ffffff;
   text-align: center;

@@ -1,6 +1,7 @@
 // app/layout.js
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS globally
 import { Poppins } from "next/font/google";
+import { Container } from "react-bootstrap";
 import "./globals.css"; // Import global styles
 
 import Footer from "./components/Footer/Footer";
@@ -24,8 +25,11 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body>
         <ScrollHandler /> {/* Handles hash scrolling globally */}
-        <Navbar />
-        <main>{children}</main> {/* Page content will be injected here */}
+        <Container fluid id="mainContainer" className="px-0">
+          <Navbar />
+          {children}
+        </Container>{" "}
+        {/* Page content will be injected here */}
         <Footer />
       </body>
     </html>
