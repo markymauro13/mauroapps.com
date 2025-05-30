@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.11.2"
+    "@netlify/plugin-nextjs": "^5.11.2",
+    "eslint": "^9.27.0"
   }
 }
