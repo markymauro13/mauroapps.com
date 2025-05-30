@@ -11,7 +11,7 @@ export default function Navbar() {
   // Helper for conditional hash link generation
   const generateLink = (targetPage, hash) => {
     if (pathname === targetPage) return `#${hash}`;
-    return `${targetPage}#${hash}`;
+    return `${targetPage}`;
   };
 
   return (
