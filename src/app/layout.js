@@ -1,8 +1,7 @@
 // app/layout.js
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS globally
 import "./globals.css"; // Import global styles
-import "./index.css"; // Import any additional styles
-import "./styles.css"; // Import custom styles
+import { Poppins } from "next/font/google";
 
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
@@ -13,6 +12,12 @@ export const metadata = {
   title: "My Next.js Application",
   description: "Converted from CRA",
 };
+
+const poppins = Poppins({
+  weight: ["300", "400", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function RootLayout({ children }) {
   return (
