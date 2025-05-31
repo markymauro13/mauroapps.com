@@ -3,7 +3,7 @@ import "./Contact.css";
 
 export default function Contact() {
   return (
-    <div className="content-wrapper">
+    <div className="hero-wrapper">
       <Container>
         <Row className="justify-content-center">
           <Col lg="8" className="text-center">
