@@ -20,16 +20,16 @@ export default function HeroSection() {
           <h1 className="hero-title">
             <span className="gradient-text">Mauro Apps</span>
           </h1>
-          <p className="hero-subtitle">Crafting Innovative SaaS Mobile Solutions</p>
+          <p className="hero-subtitle">Building mobile apps that scale.</p>
           <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <Button 
-              as={Link} 
-              to="#projects" 
+            <Button
+              as={Link}
+              to="#projects"
               variant="primary"
-              className="mt-4 card-button" 
+              className="mt-4 card-button"
               size="lg"
             >
               Explore Our Projects

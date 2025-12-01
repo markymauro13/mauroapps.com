@@ -7,7 +7,7 @@ export default function About() {
     <>
       {/* <AboutHero /> */}
       <AboutSection />
-      <StatsSection />
+      {/* <StatsSection /> */}
     </>
   );
 }

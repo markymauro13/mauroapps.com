@@ -7,11 +7,11 @@ export default function Footer() {
     <>
       <footer id="contact" className="text-center">
         <Container>
-          <p>&copy; 2024 Mauro Apps LLC. All rights reserved.</p>
+          <p>© 2025 Mauro Apps LLC. All rights reserved.</p>
           <p>
             Email:{" "}
-            <a href="mailto:markymauro@gmail.com" className="text-primary text-light">
-              markymauro@gmail.com
+            <a href="mailto:mark@mauroapps.com" className="text-primary text-light">
+              mark@mauroapps.com
             </a>
           </p>
         </Container>
