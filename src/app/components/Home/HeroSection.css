@@ -1,0 +1,125 @@
+.hero-wrapper {
+<<<<<<< HEAD:src/components/Home/HeroSection.css
+  min-height: 85vh;
+=======
+  position: relative;
+  min-height: 40vh;
+>>>>>>> 3a0bdc5f1ae3d26bc451044886ad033cdbb627b4:src/app/components/Home/HeroSection.css
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.8) 0%, rgba(245, 245, 247, 0) 70%),
+    linear-gradient(180deg, #FFFFFF 0%, #F5F5F7 100%);
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.hero-title {
+  margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+  font-size: 24px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-button {
+  padding: 0.5rem 1.5rem;
+}
+
+.hero-text-wrapper {
+  flex: 1;
+  max-width: 600px;
+}
+
+.badge-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.hero-button {
+  background: var(--primary-color);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.button-arrow {
+  transition: transform 0.3s ease;
+}
+
+.hero-button:hover .button-arrow {
+  transform: translateX(4px);
+}
+
+@keyframes float {
+<<<<<<< HEAD:src/components/Home/HeroSection.css
+
+=======
+>>>>>>> 3a0bdc5f1ae3d26bc451044886ad033cdbb627b4:src/app/components/Home/HeroSection.css
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-subtitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+<<<<<<< HEAD:src/components/Home/HeroSection.css
+  .floating-frame {
+    width: 100%;
+  }
+}
+=======
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .floating-frame {
+    width: 100%;
+  }
+}
+>>>>>>> 3a0bdc5f1ae3d26bc451044886ad033cdbb627b4:src/app/components/Home/HeroSection.css

@@ -1,0 +1,26 @@
+body,
+html {
+  height: 100vh !important;
+}
+
+#mainContainer {
+  min-height: calc(100vh - 120px) !important;
+}
+
+footer {
+  padding: 25px 0px 25px 0px;
+  height: 120px;
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+}
+
+footer a {
+  color: #ffffff !important;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+footer a:hover {
+  opacity: 0.8;
+}
