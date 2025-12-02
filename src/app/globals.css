@@ -1,193 +1,165 @@
-:root {
-  --primary-gradient: linear-gradient(45deg, #ff8c00, #ff6347);
-  --surface-color: #ffffff;
-  --text-primary: #000000;
-  --text-secondary: #404040;
-  --accent-color: #000000;
-  --background-color: #f5f5f7;
+/* ═══════════════════════════════════════════════════════════════════════════
+   Global Component Overrides & Utilities
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Import base design system */
+@import '../index.css';
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Page Transitions
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-html {
-  scroll-behavior: smooth;
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.6s var(--ease-out-expo);
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--surface-color);
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #ff6b6b88, #4ecdc488);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-}
-
-::selection {
-  background: #4ecdc4;
-  color: white;
-}
-
-.content-wrapper {
-  text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #007bff, #00c6ff);
-  color: #fff;
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.main-title {
-  font-size: 3.5rem;
-  margin-bottom: 20px;
-  font-weight: 700;
-  letter-spacing: -1px;
-  color: #000000;
-}
-
-.subtitle {
-  font-size: 1.5rem;
-  margin-bottom: 50px;
-  opacity: 0.9;
-  color: #404040;
-  line-height: 1.4;
-}
-
-.contact-title,
-.about-title {
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-  letter-spacing: -1px;
-  color: #000000;
-}
-
-.hero-subtitle {
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  color: #404040;
-  margin-bottom: 1.5rem;
-  line-height: 1.4;
-}
-
-.gradient-text {
-  background: var(--primary-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+/* ─────────────────────────────────────────────────────────────────────────────
+   Hero Styles (shared across pages)
+   ───────────────────────────────────────────────────────────────────────────── */
 
 .hero-wrapper {
-  min-height: 60vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4rem 2rem;
-  background: radial-gradient(circle at top right, rgba(0, 0, 0, 0.02), transparent),
-    radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.02), transparent);
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-4xl) var(--space-xl);
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-  letter-spacing: -1px;
+  margin-bottom: var(--space-lg);
 }
 
-.hero-button {
-  background: #000000;
-  color: white;
-  border: 2px solid #000000;
-  border-radius: 30px;
-  padding: 0.8rem 2rem;
+.hero-subtitle {
+  font-size: clamp(19px, 2.5vw, 28px);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.35;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2xl);
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Section Titles
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.section-title {
+  font-size: clamp(32px, 5vw, 56px);
   font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
+  letter-spacing: -0.024em;
+  line-height: 1.08;
+  text-align: center;
+  margin-bottom: var(--space-md);
 }
 
-.hero-button:hover {
-  background: transparent;
-  color: #000000;
-  border-color: #000000;
-  transform: translateY(-2px);
+.section-subtitle {
+  font-size: clamp(17px, 2vw, 21px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--space-3xl);
 }
 
-.card {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* ─────────────────────────────────────────────────────────────────────────────
+   iOS App Badge
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.ios-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--color-black);
+  border-radius: var(--radius-md);
+  color: var(--color-white);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--duration-normal) var(--ease-out-expo);
 }
 
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+.ios-badge:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
+  color: var(--color-white);
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.ios-badge svg {
+  width: 20px;
+  height: 20px;
 }
 
-.fade-up {
-  animation: fadeUp 0.8s ease forwards;
+/* ─────────────────────────────────────────────────────────────────────────────
+   Link Styles
+   ───────────────────────────────────────────────────────────────────────────── */
+
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: color var(--duration-fast) ease;
+}
+
+a:hover {
+  color: var(--accent-blue-hover);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Bootstrap Overrides
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Container */
+.container,
+.container-fluid {
+  padding-left: var(--space-xl);
+  padding-right: var(--space-xl);
 }
 
 @media (max-width: 768px) {
-  .main-title {
-    font-size: 2.5rem;
-  }
-
-  .subtitle {
-    font-size: 1.2rem;
-  }
-
-  .content-wrapper {
-    padding: 1rem;
-  }
-
-  .card {
-    margin: 1rem;
-  }
-
-  .hero-wrapper {
-    min-height: 50vh;
-    padding: 3rem 1rem;
+  .container,
+  .container-fluid {
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
   }
 }
 
-@media (max-width: 576px) {
-  .main-title {
-    font-size: 2rem;
-  }
+/* Remove Bootstrap default card styles */
+.card {
+  border: none;
+  background: transparent;
+}
 
-  .subtitle {
-    font-size: 1rem;
+/* ─────────────────────────────────────────────────────────────────────────────
+   Responsive Typography Refinements
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .hero-wrapper {
+    min-height: 80vh;
+    padding: var(--space-3xl) var(--space-lg);
+  }
+  
+  .hero-subtitle {
+    font-size: 19px;
+    margin-bottom: var(--space-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-wrapper {
+    min-height: 70vh;
   }
 }
