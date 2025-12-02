@@ -1,9 +1,6 @@
 import React from "react";
-import { Container } from "react-bootstrap";
-import { HashLink as Link } from "react-router-hash-link";
+import { Container, Button } from "react-bootstrap";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { Button, Container } from "react-bootstrap";
 import "./HeroSection.css";
 
 export default function HeroSection() {
@@ -27,12 +24,12 @@ export default function HeroSection() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <Link
-              to="#projects"
+            <a
+              href="#projects"
               className="btn-primary"
             >
               Explore Our Projects
-            </Link>
+            </a>
           </motion.div>
         </motion.div>
       </Container>

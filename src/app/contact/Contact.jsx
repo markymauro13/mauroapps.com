@@ -1,7 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
-import "./Contact.css";
-import { Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
+import "./Contact.css";
 
 export default function Contact() {
   return (
