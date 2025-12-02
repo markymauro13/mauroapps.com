@@ -1,35 +1,39 @@
 // app/layout.js
-import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS globally
-import { Poppins } from "next/font/google";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Inter } from "next/font/google";
 import { Container } from "react-bootstrap";
-import "./globals.css"; // Import global styles
+import "../index.css";
+import "./globals.css";
 
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import ScrollHandler from "./components/ScrollHandler";
 
-// Optional: Define metadata for your application
 export const metadata = {
-  title: "MauroApps.com - Innovative Mobile SaaS Solutions",
-  description: "Converted from CRA",
+  title: "Mauro Apps — iOS App Studio",
+  description: "Premium iOS applications crafted with care. Beautiful interfaces, native performance, thoughtful details.",
 };
 
-const poppins = Poppins({
-  weight: ["300", "400", "600", "700"],
+// Inter as fallback - closest Google Font to SF Pro
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-inter",
 });
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body>
-        <ScrollHandler /> {/* Handles hash scrolling globally */}
-        <Container fluid id="mainContainer" className="px-0">
-          <Navbar />
+        <ScrollHandler />
+        <Navbar />
+        <main id="mainContainer">
           {children}
-        </Container>{" "}
-        {/* Page content will be injected here */}
+        </main>
         <Footer />
       </body>
     </html>

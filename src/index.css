@@ -1,0 +1,604 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAURO APPS - Apple-Inspired Design System
+   Premium iOS App Studio Aesthetic
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─────────────────────────────────────────────────────────────────────────
+     Color Palette - Sophisticated & Minimal
+     ───────────────────────────────────────────────────────────────────────── */
+  
+  /* Primary Colors */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-bg: #FBFBFD;
+  --color-bg-secondary: #F5F5F7;
+  
+  /* Text Colors */
+  --text-primary: #1D1D1F;
+  --text-secondary: #6E6E73;
+  --text-tertiary: #86868B;
+  
+  /* Accent - Apple Blue */
+  --accent-blue: #0071E3;
+  --accent-blue-hover: #0077ED;
+  
+  /* Premium Gradients */
+  --gradient-text: linear-gradient(90deg, #1D1D1F 0%, #424245 50%, #1D1D1F 100%);
+  --gradient-text-shimmer: linear-gradient(
+    105deg,
+    #1D1D1F 0%,
+    #1D1D1F 40%,
+    #6E6E73 50%,
+    #1D1D1F 60%,
+    #1D1D1F 100%
+  );
+  --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.15), transparent);
+  --gradient-glow: radial-gradient(circle at 50% 50%, rgba(0, 113, 227, 0.08), transparent 60%);
+  
+  /* Glass Effects */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-heavy: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.04);
+  --glass-blur: 20px;
+  
+  /* Shadows - Subtle & Layered */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 24px 80px rgba(0, 0, 0, 0.14), 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
+  
+  /* Typography */
+  --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-pill: 980px;
+  
+  /* Transitions - Apple's Signature Easing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 0.2s;
+  --duration-normal: 0.4s;
+  --duration-slow: 0.8s;
+  --duration-slower: 1.2s;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Base Styles
+   ───────────────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-system);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+  color: var(--text-primary);
+  background-color: var(--color-bg);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Typography System
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Display - Massive Headlines */
+.display-hero {
+  font-size: clamp(48px, 10vw, 96px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  margin: 0;
+}
+
+/* Large Title */
+.title-large {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+/* Medium Title */
+.title-medium {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.024em;
+  line-height: 1.08;
+  margin: 0;
+}
+
+/* Small Title */
+.title-small {
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* Headline */
+.headline {
+  font-size: clamp(21px, 2.5vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.016em;
+  line-height: 1.14;
+  margin: 0;
+}
+
+/* Body Large */
+.body-large {
+  font-size: clamp(19px, 2vw, 24px);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.42;
+  color: var(--text-secondary);
+}
+
+/* Body */
+.body {
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  line-height: 1.47059;
+  color: var(--text-secondary);
+}
+
+/* Caption */
+.caption {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.016em;
+  line-height: 1.43;
+  color: var(--text-tertiary);
+}
+
+/* Eyebrow - Small Uppercase Labels */
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Text Effects
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.text-gradient {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-shimmer {
+  background: var(--gradient-text-shimmer);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 100% 50%; }
+  50% { background-position: 0% 50%; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Layout Utilities
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.content-wrapper {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.content-wrapper-wide {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.content-wrapper-narrow {
+  width: 100%;
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.section {
+  padding: var(--space-5xl) 0;
+}
+
+.section-tight {
+  padding: var(--space-4xl) 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Glass Morphism
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: saturate(180%) blur(var(--glass-blur));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+.glass-heavy {
+  background: var(--glass-bg-heavy);
+  backdrop-filter: saturate(180%) blur(30px);
+  -webkit-backdrop-filter: saturate(180%) blur(30px);
+  border: 1px solid var(--glass-border);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Buttons - Premium Style
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-family: var(--font-system);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  color: var(--color-white);
+  background: var(--color-black);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: #333;
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-family: var(--font-system);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  color: var(--accent-blue);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  white-space: nowrap;
+}
+
+.btn-secondary:hover {
+  color: var(--accent-blue-hover);
+  text-decoration: underline;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: var(--font-system);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  color: var(--text-primary);
+  background: transparent;
+  border: 2px solid var(--text-primary);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  white-space: nowrap;
+}
+
+.btn-outline:hover {
+  color: var(--color-white);
+  background: var(--color-black);
+  border-color: var(--color-black);
+  text-decoration: none;
+}
+
+/* Link Style Button */
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 21px;
+  font-weight: 400;
+  color: var(--accent-blue);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--duration-fast) ease;
+}
+
+.btn-link:hover {
+  color: var(--accent-blue-hover);
+  text-decoration: underline;
+}
+
+.btn-link svg,
+.btn-link .arrow {
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.btn-link:hover svg,
+.btn-link:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Cards - Elevated Design
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.card-elevated {
+  background: var(--color-white);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all var(--duration-slow) var(--ease-out-expo);
+}
+
+.card-elevated:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.card-flat {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.card-flat:hover {
+  background: var(--color-white);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Animations - Entrance Effects
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in {
+  animation: fadeIn var(--duration-slow) var(--ease-out-expo) forwards;
+}
+
+.animate-fade-up {
+  animation: fadeUp var(--duration-slower) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+.animate-fade-down {
+  animation: fadeDown var(--duration-slow) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--duration-slow) var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+/* Animation Delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Custom Scrollbar - Minimal
+   ───────────────────────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Hide scrollbar for cleaner look */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Selection
+   ───────────────────────────────────────────────────────────────────────────── */
+
+::selection {
+  background: rgba(0, 113, 227, 0.2);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Focus States - Accessibility
+   ───────────────────────────────────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Responsive Breakpoints
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 1068px) {
+  :root {
+    --space-4xl: 5rem;
+    --space-5xl: 6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --space-4xl: 4rem;
+    --space-5xl: 5rem;
+  }
+  
+  .content-wrapper,
+  .content-wrapper-wide,
+  .content-wrapper-narrow {
+    padding: 0 var(--space-lg);
+  }
+  
+  .section {
+    padding: var(--space-4xl) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --space-4xl: 3rem;
+    --space-5xl: 4rem;
+  }
+}

@@ -8,40 +8,49 @@ import "./Navbar.css";
 export default function Navbar() {
   const pathname = usePathname();
 
-  // Helper for conditional hash link generation
-  const generateLink = (targetPage, hash) => {
-    if (pathname === targetPage) return `#${hash}`;
-    return `${targetPage}`;
+  const isActive = (path) => {
+    if (path === '/') return pathname === '/';
+    return pathname.startsWith(path);
   };
 
   return (
     <NavbarBS expand="lg" className="navbar-light">
       <Container fluid>
         <Link href="/" className="navbar-brand" passHref>
-          <img src="/assets/logo.png" alt="Mauro Apps Logo" className="navbar-logo" />
+          <img 
+            src="/assets/logo.png" 
+            alt="Mauro Apps" 
+            className="navbar-logo" 
+          />
         </Link>
         <NavbarBS.Toggle aria-controls="navbarNav" />
         <NavbarBS.Collapse id="navbarNav">
           <Nav className="ms-auto">
-            <Nav.Link as={Link} href="/">
+            <Nav.Link 
+              as={Link} 
+              href="/" 
+              className={isActive('/') && pathname === '/' ? 'active' : ''}
+            >
               Home
             </Nav.Link>
-
-            {/* Uncomment when Solutions page is ready
-            <Nav.Link as={Link} href={generateLink("/solutions", "solutions")}>
-              Solutions
-            </Nav.Link>
-            */}
-
-            <Nav.Link as={Link} href={generateLink("/about", "about")}>
+            <Nav.Link 
+              as={Link} 
+              href="/about"
+              className={isActive('/about') ? 'active' : ''}
+            >
               About
             </Nav.Link>
-
-            <Nav.Link as={Link} href={generateLink("/", "projects")}>
-              Projects
+            <Nav.Link 
+              as={Link} 
+              href="/#projects"
+            >
+              Apps
             </Nav.Link>
-
-            <Nav.Link as={Link} href={generateLink("/contact", "contactForm")}>
+            <Nav.Link 
+              as={Link} 
+              href="/contact"
+              className={isActive('/contact') ? 'active' : ''}
+            >
               Contact
             </Nav.Link>
           </Nav>
