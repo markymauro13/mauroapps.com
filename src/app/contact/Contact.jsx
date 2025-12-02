@@ -1,6 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "./Contact.css";
-<<<<<<< HEAD:src/components/Contact/Contact.jsx
 import { Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 
@@ -34,24 +33,6 @@ export default function Contact() {
                 </motion.div>
               </div>
             </motion.div>
-=======
-
-export default function Contact() {
-  return (
-    <div className="hero-wrapper">
-      <Container>
-        <Row className="justify-content-center">
-          <Col lg="8" className="text-center">
-            <h1 className="main-title">Contact Us</h1>
-            <div className="contact-info">
-              <p className="lead">
-                email us @{" "}
-                <a href="mailto:markymauro@gmail.com" className="email-link">
-                  markymauro@gmail.com
-                </a>
-              </p>
-            </div>
->>>>>>> 3a0bdc5f1ae3d26bc451044886ad033cdbb627b4:src/app/contact/Contact.jsx
           </Col>
         </Row>
       </Container>

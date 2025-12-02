@@ -7,11 +7,11 @@
   transition: all 0.3s ease;
 }
 
-<<<<<<< HEAD:src/components/Navbar/Navbar.css
 .navbar-logo {
   width: 2.5rem;
   height: 2.5rem;
-=======
+}
+
 .navbar-nav .nav-link::after {
   content: "";
   position: absolute;
@@ -51,15 +51,19 @@
   0% {
     transform: rotate(0deg);
   }
+
   25% {
     transform: rotate(-10deg);
   }
+
   50% {
     transform: rotate(10deg);
   }
+
   75% {
     transform: rotate(-5deg);
   }
+
   100% {
     transform: rotate(0deg);
   }
@@ -70,7 +74,6 @@
   font-weight: 500;
   padding: 0.35rem 0.6rem !important;
   font-size: 0.95rem;
->>>>>>> 3a0bdc5f1ae3d26bc451044886ad033cdbb627b4:src/app/components/Navbar/Navbar.css
   transition: opacity 0.2s ease;
 }
 
@@ -104,14 +107,9 @@
     background: rgba(251, 251, 253, 0.95);
   }
 
-<<<<<<< HEAD:src/components/Navbar/Navbar.css
   .nav-link-apple {
     font-size: 17px;
     padding: 1rem 0 !important;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-=======
-  .navbar-brand {
-    margin-bottom: 0.25rem;
->>>>>>> 3a0bdc5f1ae3d26bc451044886ad033cdbb627b4:src/app/components/Navbar/Navbar.css
   }
 }
