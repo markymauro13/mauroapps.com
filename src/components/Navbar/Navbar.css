@@ -1,90 +1,51 @@
-.navbar {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 1rem 0;
-}
-
-.navbar-brand {
-  background: linear-gradient(45deg, #000000, #404040);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-weight: 800;
-  font-size: 1.8rem;
-  letter-spacing: -0.5px;
-}
-
-.navbar-nav .nav-link {
-  color: #000000 !important;
-  position: relative;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  margin: 0 0.2rem;
+.navbar-apple {
+  background: rgba(251, 251, 253, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 0.8rem 0;
   transition: all 0.3s ease;
-}
-
-.navbar-nav .nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 50%;
-  background: #000000;
-  transition: all 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover::after {
-  width: 100%;
-  left: 0;
-}
-
-.navbar-light {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.35rem 1.25rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-logo {
-  transition: transform 0.2s ease;
-  margin-right: 0;
-  width: 3.5rem;
-  height: 3.5rem;
-}
-
-.navbar-logo:hover {
-  animation: shake 0.5s ease-in-out;
-}
-
-@keyframes shake {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-10deg); }
-  50% { transform: rotate(10deg); }
-  75% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg); }
-}
-
-.nav-link {
-  color: #1D1D1F !important;
-  font-weight: 500;
-  padding: 0.35rem 0.6rem !important;
-  font-size: 0.95rem;
+  width: 2.5rem;
+  height: 2.5rem;
   transition: opacity 0.2s ease;
 }
 
-.nav-link:hover {
-  opacity: 0.7;
+.navbar-logo:hover {
+  opacity: 0.8;
+}
+
+.nav-link-apple {
+  color: #1D1D1F !important;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  padding: 0.5rem 1rem !important;
+  transition: color 0.2s ease;
+  opacity: 0.8;
+}
+
+.nav-link-apple:hover {
+  color: #0071E3 !important;
+  opacity: 1;
+}
+
+.nav-link-apple.active {
+  color: #000000 !important;
+  opacity: 1;
+  font-weight: 500;
 }
 
 @media (max-width: 991px) {
-  .navbar-light {
-    padding: 0.25rem 1rem;
+  .navbar-apple {
+    background: rgba(251, 251, 253, 0.95);
   }
-  
-  .navbar-brand {
-    margin-bottom: 0.25rem;
+
+  .nav-link-apple {
+    font-size: 17px;
+    padding: 1rem 0 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
 }

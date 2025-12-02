@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { HashLink as Link } from "react-router-hash-link";
 import { motion } from "framer-motion";
 import "./HeroSection.css";
@@ -7,33 +7,30 @@ import "./HeroSection.css";
 export default function HeroSection() {
   return (
     <div className="hero-wrapper">
-      <div className="hero-background">
-        <div className="grid-pattern"></div>
-      </div>
+      <div className="hero-background"></div>
       <Container>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="hero-content"
         >
-          <h1 className="hero-title">
-            <span className="gradient-text">Mauro Apps</span>
+          <h1 className="hero-title title-large">
+            <span className="text-gradient">Mauro Apps</span>
           </h1>
-          <p className="hero-subtitle">Building mobile apps that scale.</p>
+          <p className="hero-subtitle">
+            Crafting intuitive, powerful, and beautiful mobile experiences for the future.
+          </p>
           <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <Button
-              as={Link}
+            <Link
               to="#projects"
-              variant="primary"
-              className="mt-4 card-button"
-              size="lg"
+              className="btn-primary"
             >
               Explore Our Projects
-            </Button>
+            </Link>
           </motion.div>
         </motion.div>
       </Container>
