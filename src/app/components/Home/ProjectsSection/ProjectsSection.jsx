@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { projects } from "../../../data/projects";
 import "./ProjectsSection.css";
 
@@ -98,24 +99,37 @@ function EmptyState() {
       {/* Coming Soon Card */}
       <article className="project-card project-card-coming-soon">
         <div className="project-card-preview">
-          <div className="project-card-icon">✨</div>
+          <div className="project-card-icon" style={{ padding: 0, overflow: 'hidden', width: '150px', height: '150px' }}>
+            <Image
+              src="/assets/dearly-logo.png"
+              alt="Dearly"
+              width={100}
+              height={100}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
         </div>
         <div className="project-card-content">
-          <span className="coming-soon-badge">
-            <span>Coming Soon</span>
-          </span>
+          <a 
+            href="https://github.com/markymauro13/Dearly"
+            target="_blank"
+            rel="noreferrer"
+            className="coming-soon-badge"
+            style={{ textDecoration: 'none', cursor: 'pointer' }}
+          >
+            View on GitHub
+          </a>
           <h3 className="project-card-title" style={{ marginTop: '12px' }}>
-            Something Amazing
+            Dearly
           </h3>
           <p className="project-card-description">
-            We're working on something special. Our first iOS app is in development 
-            and will be available on the App Store soon.
+          A beautiful iOS app for preserving and cherishing greeting cards from loved ones. Scan, store, and relive your special moments forever. 
           </p>
         </div>
       </article>
       
       {/* Second Coming Soon Card */}
-      <article className="project-card project-card-coming-soon">
+      {/* <article className="project-card project-card-coming-soon">
         <div className="project-card-preview">
           <div className="project-card-icon">🚀</div>
         </div>
@@ -131,7 +145,7 @@ function EmptyState() {
             and be the first to know when we launch.
           </p>
         </div>
-      </article>
+      </article> */}
     </motion.div>
   );
 }
