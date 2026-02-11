@@ -19,10 +19,12 @@ const GridBackground = () => {
     };
 
     let mouse = { x: null, y: null };
+    let smoothMouse = { x: 0, y: 0, active: false };
 
     const handleMouseMove = (event) => {
       mouse.x = event.x;
       mouse.y = event.y;
+      smoothMouse.active = true;
     };
 
     const handleMouseLeave = () => {
@@ -49,13 +51,15 @@ const GridBackground = () => {
           let drawX = x;
           let drawY = y;
 
-          if (GRID_CONFIG.interactive && mouse.x !== null) {
-            const dx = mouse.x - x;
-            const dy = mouse.y - y;
+          if (GRID_CONFIG.interactive && smoothMouse.active) {
+            const dx = smoothMouse.x - x;
+            const dy = smoothMouse.y - y;
             const distance = Math.sqrt(dx * dx + dy * dy);
             if (distance < GRID_CONFIG.mouseRadius) {
               const force = (GRID_CONFIG.mouseRadius - distance) / GRID_CONFIG.mouseRadius;
-              drawX -= dx * force * GRID_CONFIG.distortionStrength;
+              // Smoother force curve
+              const smoothForce = Math.pow(force, 2);
+              drawX -= dx * smoothForce * GRID_CONFIG.distortionStrength;
             }
           }
           
@@ -72,13 +76,14 @@ const GridBackground = () => {
           let drawX = x;
           let drawY = y;
 
-          if (GRID_CONFIG.interactive && mouse.x !== null) {
-            const dx = mouse.x - x;
-            const dy = mouse.y - y;
+          if (GRID_CONFIG.interactive && smoothMouse.active) {
+            const dx = smoothMouse.x - x;
+            const dy = smoothMouse.y - y;
             const distance = Math.sqrt(dx * dx + dy * dy);
             if (distance < GRID_CONFIG.mouseRadius) {
               const force = (GRID_CONFIG.mouseRadius - distance) / GRID_CONFIG.mouseRadius;
-              drawY -= dy * force * GRID_CONFIG.distortionStrength;
+              const smoothForce = Math.pow(force, 2);
+              drawY -= dy * smoothForce * GRID_CONFIG.distortionStrength;
             }
           }
           
@@ -90,6 +95,15 @@ const GridBackground = () => {
     };
 
     const animate = (t) => {
+      // Lerp smooth mouse
+      if (mouse.x !== null) {
+        smoothMouse.x += (mouse.x - smoothMouse.x) * 0.2;
+        smoothMouse.y += (mouse.y - smoothMouse.y) * 0.2;
+      } else {
+        // Slowly reset or deactivate
+        smoothMouse.active = false;
+      }
+
       drawGrid(t);
       animationFrameId = requestAnimationFrame(animate);
     };

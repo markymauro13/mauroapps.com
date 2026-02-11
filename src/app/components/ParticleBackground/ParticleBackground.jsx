@@ -18,10 +18,12 @@ export default function ParticleBackground() {
     let animationFrameId;
     let particles = [];
     let mouse = { x: null, y: null, radius: PARTICLE_CONFIG.mouseRadius };
+    let smoothMouse = { x: 0, y: 0, active: false };
 
     const handleMouseMove = (event) => {
       mouse.x = event.x;
       mouse.y = event.y;
+      smoothMouse.active = true;
     };
 
     const handleMouseLeave = () => {
@@ -42,63 +44,52 @@ export default function ParticleBackground() {
         this.baseX = this.x;
         this.baseY = this.y;
         this.density = (Math.random() * 30) + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.vx = 0;
+        this.vy = 0;
         this.opacity = Math.random() * 0.5 + 0.2;
       }
 
       update() {
-        // Mouse interaction
-        if (mouse.x != null) {
-          let dx = mouse.x - this.x;
-          let dy = mouse.y - this.y;
-          let distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < mouse.radius) {
-            const forceDirectionX = dx / distance;
-            const forceDirectionY = dy / distance;
-            const force = (mouse.radius - distance) / mouse.radius;
-            const directionX = forceDirectionX * force * this.density;
-            const directionY = forceDirectionY * force * this.density;
-            
-            this.x -= directionX;
-            this.y -= directionY;
-          } else {
-            if (this.x !== this.baseX) {
-              let dx = this.x - this.baseX;
-              this.x -= dx / PARTICLE_CONFIG.returnSpeed; 
-            }
-            if (this.y !== this.baseY) {
-              let dy = this.y - this.baseY;
-              this.y -= dy / PARTICLE_CONFIG.returnSpeed;
-            }
-          }
-        }
-
-        // Standard movement
-        this.x += this.speedX;
-        this.y += this.speedY;
-        
-        // Update base position to follow the particle's drift
+        // Simple drift
         this.baseX += this.speedX;
         this.baseY += this.speedY;
 
-        // Wrap around screen
-        if (this.x > canvas.width) { 
-          this.x = 0; 
-          this.baseX = 0; 
-        } else if (this.x < 0) { 
-          this.x = canvas.width; 
-          this.baseX = canvas.width; 
+        // Wrap base position
+        if (this.baseX < 0) this.baseX = canvas.width;
+        else if (this.baseX > canvas.width) this.baseX = 0;
+        if (this.baseY < 0) this.baseY = canvas.height;
+        else if (this.baseY > canvas.height) this.baseY = 0;
+
+        // Mouse interaction (Smoother with momentum)
+        if (PARTICLE_CONFIG.interactive && smoothMouse.active) {
+          let dx = smoothMouse.x - this.x;
+          let dy = smoothMouse.y - this.y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < mouse.radius) {
+            const force = (mouse.radius - distance) / mouse.radius;
+            // Push particles away from smoothed mouse
+            const pushX = (dx / distance) * force * this.density * 0.05;
+            const pushY = (dy / distance) * force * this.density * 0.05;
+            this.vx -= pushX;
+            this.vy -= pushY;
+          }
         }
-        
-        if (this.y > canvas.height) { 
-          this.y = 0; 
-          this.baseY = 0; 
-        } else if (this.y < 0) { 
-          this.y = canvas.height; 
-          this.baseY = canvas.height; 
-        }
+
+        // Return force (Gentle spring to baseX/Y)
+        const dxBase = this.baseX - this.x;
+        const dyBase = this.baseY - this.y;
+        this.vx += dxBase / PARTICLE_CONFIG.returnSpeed;
+        this.vy += dyBase / PARTICLE_CONFIG.returnSpeed;
+
+        // Friction/Damping
+        this.vx *= 0.95;
+        this.vy *= 0.95;
+
+        this.x += this.vx;
+        this.y += this.vy;
       }
 
       draw() {
@@ -119,6 +110,14 @@ export default function ParticleBackground() {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Lerp smooth mouse
+      if (mouse.x !== null) {
+        smoothMouse.x += (mouse.x - smoothMouse.x) * 0.2;
+        smoothMouse.y += (mouse.y - smoothMouse.y) * 0.2;
+      } else {
+        smoothMouse.active = false;
+      }
       
       particles.forEach((particle) => {
         particle.update();

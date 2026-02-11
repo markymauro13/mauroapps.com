@@ -19,10 +19,12 @@ const ShapesBackground = () => {
     };
 
     let mouse = { x: null, y: null };
+    let smoothMouse = { x: 0, y: 0, active: false };
 
     const handleMouseMove = (event) => {
       mouse.x = event.x;
       mouse.y = event.y;
+      smoothMouse.active = true;
     };
 
     const handleMouseLeave = () => {
@@ -44,25 +46,36 @@ const ShapesBackground = () => {
       }
 
       update() {
-        // Mouse interaction
-        if (SHAPES_CONFIG.interactive && mouse.x !== null) {
-          const dx = mouse.x - this.x;
-          const dy = mouse.y - this.y;
+        // Mouse interaction (Smoother with momentum)
+        if (SHAPES_CONFIG.interactive && smoothMouse.active) {
+          const dx = smoothMouse.x - this.x;
+          const dy = smoothMouse.y - this.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
           
           if (distance < SHAPES_CONFIG.avoidRadius) {
             const force = (SHAPES_CONFIG.avoidRadius - distance) / SHAPES_CONFIG.avoidRadius;
-            const pushX = (dx / distance) * force * SHAPES_CONFIG.mouseAvoid * 5;
-            const pushY = (dy / distance) * force * SHAPES_CONFIG.mouseAvoid * 5;
+            const pushX = (dx / distance) * force * SHAPES_CONFIG.mouseAvoid * 0.1;
+            const pushY = (dy / distance) * force * SHAPES_CONFIG.mouseAvoid * 0.1;
             
-            this.x -= pushX;
-            this.y -= pushY;
+            this.vx -= pushX;
+            this.vy -= pushY;
           }
+        }
+
+        // Relaxed physics
+        this.vx *= 0.99;
+        this.vy *= 0.99;
+        this.angle += this.va;
+
+        const totalSpeed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        const maxS = SHAPES_CONFIG.speed * 2;
+        if (totalSpeed > maxS) {
+          this.vx = (this.vx / totalSpeed) * maxS;
+          this.vy = (this.vy / totalSpeed) * maxS;
         }
 
         this.x += this.vx;
         this.y += this.vy;
-        this.angle += this.va;
 
         if (this.x < -this.size) this.x = canvas.width + this.size;
         if (this.x > canvas.width + this.size) this.x = -this.size;
@@ -114,6 +127,15 @@ const ShapesBackground = () => {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Lerp smooth mouse
+      if (mouse.x !== null) {
+        smoothMouse.x += (mouse.x - smoothMouse.x) * 0.2;
+        smoothMouse.y += (mouse.y - smoothMouse.y) * 0.2;
+      } else {
+        smoothMouse.active = false;
+      }
+
       shapes.forEach(s => {
         s.update();
         s.draw();

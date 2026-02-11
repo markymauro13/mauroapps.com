@@ -19,10 +19,12 @@ const WaveBackground = () => {
     };
 
     let mouse = { x: null, y: null };
+    let smoothMouse = { x: 0, y: 0, active: false };
 
     const handleMouseMove = (event) => {
       mouse.x = event.x;
       mouse.y = event.y;
+      smoothMouse.active = true;
     };
 
     const handleMouseLeave = () => {
@@ -32,6 +34,14 @@ const WaveBackground = () => {
 
     const animate = (t) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Lerp smooth mouse
+      if (mouse.x !== null) {
+        smoothMouse.x += (mouse.x - smoothMouse.x) * 0.2;
+        smoothMouse.y += (mouse.y - smoothMouse.y) * 0.2;
+      } else {
+        smoothMouse.active = false;
+      }
       
       const { waveCount, waveSpeed, amplitude, frequency, colors, interactive, mouseInfluence } = WAVE_CONFIG;
 
@@ -45,11 +55,13 @@ const WaveBackground = () => {
           const phase = (t * waveSpeed) + (i * 2);
           
           let mouseDip = 0;
-          if (interactive && mouse.x !== null) {
-            const dist = Math.abs(x - mouse.x);
-            if (dist < 200) {
-              const force = (200 - dist) / 200;
-              mouseDip = force * mouseInfluence;
+          if (interactive && smoothMouse.active) {
+            const dist = Math.abs(x - smoothMouse.x);
+            if (dist < 250) {
+              const force = (250 - dist) / 250;
+              // Organic bell curve
+              const smoothForce = Math.pow(force, 2);
+              mouseDip = smoothForce * mouseInfluence;
             }
           }
 

@@ -33,10 +33,12 @@ const IconBackground = () => {
     };
 
     let mouse = { x: null, y: null };
+    let smoothMouse = { x: 0, y: 0, active: false };
 
     const handleMouseMove = (event) => {
       mouse.x = event.x;
       mouse.y = event.y;
+      smoothMouse.active = true;
     };
 
     const handleMouseLeave = () => {
@@ -53,30 +55,41 @@ const IconBackground = () => {
         this.vx = (Math.random() * (ICON_CONFIG.velocityRange[1] - ICON_CONFIG.velocityRange[0])) + ICON_CONFIG.velocityRange[0];
         this.vy = (Math.random() * (ICON_CONFIG.velocityRange[1] - ICON_CONFIG.velocityRange[0])) + ICON_CONFIG.velocityRange[0];
         this.angle = Math.random() * Math.PI * 2;
-        this.va = (Math.random() * (ICON_CONFIG.rotationSpeedRange[1] - ICON_CONFIG.rotationSpeedRange[0])) + ICON_CONFIG.rotationSpeedRange[0];
+        this.va = (Math.random() * (ICON_CONFIG.rotationSpeedRange[1] - ICON_CONFIG.rotationSpeedRange[0])) + ICON_CONFIG.rotationSpeedRange[1];
         this.opacity = Math.random() * (ICON_CONFIG.opacityRange[1] - ICON_CONFIG.opacityRange[0]) + ICON_CONFIG.opacityRange[0];
       }
 
       update() {
-        // Mouse interaction
-        if (ICON_CONFIG.interactive && mouse.x !== null) {
-          const dx = mouse.x - (this.x + this.size / 2);
-          const dy = mouse.y - (this.y + this.size / 2);
+        // Mouse interaction (Smoother with momentum)
+        if (ICON_CONFIG.interactive && smoothMouse.active) {
+          const dx = smoothMouse.x - (this.x + this.size / 2);
+          const dy = smoothMouse.y - (this.y + this.size / 2);
           const distance = Math.sqrt(dx * dx + dy * dy);
           
           if (distance < ICON_CONFIG.pushRadius) {
             const force = (ICON_CONFIG.pushRadius - distance) / ICON_CONFIG.pushRadius;
-            const pushX = (dx / distance) * force * ICON_CONFIG.mousePush * 5;
-            const pushY = (dy / distance) * force * ICON_CONFIG.mousePush * 5;
+            const pushX = (dx / distance) * force * ICON_CONFIG.mousePush * 0.1;
+            const pushY = (dy / distance) * force * ICON_CONFIG.mousePush * 0.1;
             
-            this.x -= pushX;
-            this.y -= pushY;
+            this.vx -= pushX;
+            this.vy -= pushY;
           }
+        }
+
+        // Relaxed physics
+        this.vx *= 0.99;
+        this.vy *= 0.99;
+        this.angle += this.va;
+
+        const totalSpeed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        const maxS = 1.5;
+        if (totalSpeed > maxS) {
+          this.vx = (this.vx / totalSpeed) * maxS;
+          this.vy = (this.vy / totalSpeed) * maxS;
         }
 
         this.x += this.vx;
         this.y += this.vy;
-        this.angle += this.va;
 
         if (this.x < -this.size) this.x = canvas.width;
         if (this.x > canvas.width) this.x = -this.size;
@@ -143,6 +156,14 @@ const IconBackground = () => {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Lerp smooth mouse
+      if (mouse.x !== null) {
+        smoothMouse.x += (mouse.x - smoothMouse.x) * 0.2;
+        smoothMouse.y += (mouse.y - smoothMouse.y) * 0.2;
+      } else {
+        smoothMouse.active = false;
+      }
       
       floatingIcons.forEach(icon => {
         icon.update();
