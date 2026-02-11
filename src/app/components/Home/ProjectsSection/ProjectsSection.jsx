@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { FaGithub, FaApple, FaGooglePlay } from "react-icons/fa";
 import { projects } from "../../../data/projects";
 import "./ProjectsSection.css";
 
@@ -109,25 +110,38 @@ function EmptyState() {
           />
         </div>
         <div className="project-card-content">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-            <h3 className="project-card-title" style={{ margin: 0 }}>
-              Dearly
-            </h3>
+          <header className="project-card-header">
+            <h3 className="project-card-title">Dearly</h3>
             <span className="coming-soon-tag">Coming Soon</span>
-          </div>
+          </header>
+          
           <p className="project-card-description">
             A beautiful app for preserving and cherishing greeting cards from loved ones. 
             Scan, store, and relive your special moments forever.
           </p>
-          <a 
-            href="https://github.com/markymauro13/Dearly"
-            target="_blank"
-            rel="noreferrer"
-            className="project-card-action"
-            style={{ marginTop: 'auto' }}
-          >
-            View on GitHub
-          </a>
+          
+          <div className="project-card-actions-group">
+            <div className="app-store-placeholders">
+              <div className="btn-app-store-placeholder ios">
+                <FaApple size={16} />
+                <span>App Store</span>
+              </div>
+              <div className="btn-app-store-placeholder android">
+                <FaGooglePlay size={14} />
+                <span>Google Play</span>
+              </div>
+            </div>
+            
+            <a 
+              href="https://github.com/markymauro13/Dearly"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-github"
+            >
+              <FaGithub size={18} />
+              View on GitHub
+            </a>
+          </div>
         </div>
       </article>
     </motion.div>

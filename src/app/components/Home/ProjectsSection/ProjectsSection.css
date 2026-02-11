@@ -207,10 +207,10 @@
 /* Compact Card - Horizontal Layout */
 .project-card-compact {
   flex-direction: row;
-  align-items: center;
-  padding: var(--space-xl);
-  gap: var(--space-xl);
-  max-width: 560px;
+  align-items: flex-start;
+  padding: 24px;
+  gap: 24px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -220,123 +220,126 @@
 
 .project-card-icon-compact {
   flex-shrink: 0;
-  width: 100px;
-  height: 100px;
-  border-radius: 22px;
+  width: 120px;
+  height: 120px;
+  border-radius: 24px;
   overflow: hidden;
   box-shadow: var(--shadow-md);
 }
 
-.dearly-logo {
-  display: block;
-}
-
-[data-theme="dark"] .dearly-logo {
-  filter: none;
-}
-
 .project-card-compact .project-card-content {
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.project-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .project-card-compact .project-card-title {
-  font-size: 20px;
+  font-size: 24px;
+  margin: 0;
 }
 
 .project-card-compact .project-card-description {
-  font-size: 14px;
-  margin-bottom: var(--space-sm);
+  font-size: 15px;
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.4;
 }
 
-/* Coming Soon Tag */
-.coming-soon-tag {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 4px 8px;
-  background: rgba(0, 113, 227, 0.1);
-  color: var(--accent-blue);
-  border-radius: 6px;
-  line-height: 1;
-  border: 1px solid rgba(0, 113, 227, 0.1);
+/* Actions Grouping */
+.project-card-actions-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
 }
 
-[data-theme="dark"] .coming-soon-tag {
-  background: rgba(10, 132, 255, 0.15);
-  color: var(--accent-blue);
-  border-color: rgba(10, 132, 255, 0.1);
+/* App Store Placeholders */
+.app-store-placeholders {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
 
-/* Action Buttons in Cards */
-.coming-soon-badge,
-.project-start-button {
+.btn-app-store-placeholder {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px 16px;
+  gap: 8px;
+  padding: 10px 16px;
   background: var(--color-bg-secondary);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: var(--radius-pill);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-  text-decoration: none;
-  transition: all var(--duration-fast) var(--ease-out-expo);
-  cursor: pointer;
-  margin-bottom: 8px;
+  color: #717171; /* Better readability for placeholder */
+  cursor: default;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  min-width: 140px;
 }
 
-.coming-soon-badge:hover,
-.project-start-button:hover {
-  background: var(--color-black);
-  color: var(--color-white);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
-  border-color: transparent;
+[data-theme="dark"] .btn-app-store-placeholder {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #a1a1a1;
 }
 
-[data-theme="dark"] .coming-soon-badge,
-[data-theme="dark"] .project-start-button {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: transparent;
+/* Coming Soon Tag Improvement */
+.coming-soon-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 5px 10px;
+  background: rgba(0, 113, 227, 0.08);
+  color: var(--accent-blue);
+  border-radius: 6px;
+  line-height: 1;
+  border: 1px solid rgba(0, 113, 227, 0.15);
 }
 
-[data-theme="dark"] .coming-soon-badge:hover,
-[data-theme="dark"] .project-start-button:hover {
-  background: var(--color-white);
-  color: var(--color-black);
+[data-theme="dark"] .coming-soon-tag {
+  background: rgba(10, 132, 255, 0.12);
+  border-color: rgba(10, 132, 255, 0.2);
 }
 
-.project-card-action {
+/* GitHub Button - Professional Version */
+.btn-github {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: var(--accent-blue);
-  color: var(--color-white);
-  border-radius: var(--radius-pill);
-  font-size: 13px;
-  font-weight: 500;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: #24292f;
+  color: white !important;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
   text-decoration: none;
   transition: all var(--duration-normal) var(--ease-out-expo);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-.project-card-action:hover {
-  background: var(--accent-blue-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-  color: var(--color-white);
+.btn-github:hover {
+  background: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
 }
 
-.project-card-action svg {
-  transition: transform var(--duration-normal) var(--ease-out-expo);
+[data-theme="dark"] .btn-github {
+  background: #f0f6fc;
+  color: #24292f !important;
 }
 
-.project-card-action:hover svg {
-  transform: translateX(2px);
+[data-theme="dark"] .btn-github:hover {
+  background: #ffffff;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -365,6 +368,32 @@
   
   .project-card-content {
     padding: var(--space-lg);
+  }
+
+  .project-card-compact {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 580px) {
+  .project-card-compact {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px 24px;
+  }
+
+  .project-card-header {
+    justify-content: center;
+  }
+
+  .project-card-icon-compact {
+    width: 100px;
+    height: 100px;
+  }
+
+  .app-store-placeholders {
+    grid-template-columns: 1fr;
   }
 }
 
