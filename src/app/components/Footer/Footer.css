@@ -8,6 +8,10 @@ footer {
   padding: 0;
 }
 
+[data-theme="dark"] footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .footer-content {
   max-width: 980px;
   margin: 0 auto;
@@ -113,7 +117,7 @@ footer {
 /* Simple Footer Variant */
 .footer-simple {
   text-align: center;
-  padding: var(--space-2xl) var(--space-xl);
+  padding: var(--space-3xl) var(--space-xl);
 }
 
 .footer-simple p {
@@ -122,6 +126,7 @@ footer {
   color: var(--text-tertiary);
   margin: 0 0 var(--space-sm);
   letter-spacing: -0.01em;
+  transition: color var(--duration-fast) ease;
 }
 
 .footer-simple p:last-child {
@@ -129,13 +134,30 @@ footer {
 }
 
 .footer-simple a {
-  color: var(--text-secondary);
+  color: var(--accent-blue);
   text-decoration: none;
-  transition: color var(--duration-fast) ease;
+  transition: all var(--duration-fast) ease;
+  position: relative;
 }
 
 .footer-simple a:hover {
-  color: var(--text-primary);
+  color: var(--accent-blue-hover);
+  transform: translateY(-1px);
+}
+
+.footer-simple a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent-blue-hover);
+  transition: width var(--duration-normal) var(--ease-out-expo);
+}
+
+.footer-simple a:hover::after {
+  width: 100%;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────

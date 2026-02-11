@@ -19,7 +19,7 @@ export default function ProjectsSection() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className="projects-eyebrow">Our Apps</span>
-          <h2 className="projects-title">Designed for iOS</h2>
+          <h2 className="projects-title">Designed for Everyone</h2>
           <p className="projects-subtitle">
             Premium mobile applications built with attention to every detail.
             Native performance, beautiful interfaces.
@@ -96,56 +96,39 @@ function EmptyState() {
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* Coming Soon Card */}
-      <article className="project-card project-card-coming-soon">
-        <div className="project-card-preview">
-          <div className="project-card-icon" style={{ padding: 0, overflow: 'hidden', width: '150px', height: '150px' }}>
-            <Image
-              src="/assets/dearly-logo.png"
-              alt="Dearly"
-              width={100}
-              height={100}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </div>
+      <article className="project-card project-card-compact">
+        <div className="project-card-icon-compact">
+          <Image
+            src="/assets/dearly_icon.png"
+            alt="Dearly"
+            width={120}
+            height={120}
+            className="dearly-logo"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '22px' }}
+          />
         </div>
         <div className="project-card-content">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+            <h3 className="project-card-title" style={{ margin: 0 }}>
+              Dearly
+            </h3>
+            <span className="coming-soon-tag">Coming Soon</span>
+          </div>
+          <p className="project-card-description">
+            A beautiful app for preserving and cherishing greeting cards from loved ones. 
+            Scan, store, and relive your special moments forever.
+          </p>
           <a 
             href="https://github.com/markymauro13/Dearly"
             target="_blank"
             rel="noreferrer"
-            className="coming-soon-badge"
-            style={{ textDecoration: 'none', cursor: 'pointer' }}
+            className="project-card-action"
+            style={{ marginTop: 'auto' }}
           >
             View on GitHub
           </a>
-          <h3 className="project-card-title" style={{ marginTop: '12px' }}>
-            Dearly
-          </h3>
-          <p className="project-card-description">
-          A beautiful iOS app for preserving and cherishing greeting cards from loved ones. Scan, store, and relive your special moments forever. 
-          </p>
         </div>
       </article>
-      
-      {/* Second Coming Soon Card */}
-      {/* <article className="project-card project-card-coming-soon">
-        <div className="project-card-preview">
-          <div className="project-card-icon">🚀</div>
-        </div>
-        <div className="project-card-content">
-          <span className="coming-soon-badge">
-            <span>In Development</span>
-          </span>
-          <h3 className="project-card-title" style={{ marginTop: '12px' }}>
-            More to Come
-          </h3>
-          <p className="project-card-description">
-            Stay tuned for more innovative iOS applications. Follow us for updates 
-            and be the first to know when we launch.
-          </p>
-        </div>
-      </article> */}
     </motion.div>
   );
 }

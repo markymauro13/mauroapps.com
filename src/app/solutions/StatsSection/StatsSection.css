@@ -1,10 +1,10 @@
 .stats-section {
   padding: 80px 20px;
-  background-color: #f8f9fa;
+  background-color: var(--color-bg-secondary);
 }
 
 .stat-card {
-  background-color: #fff;
+  background-color: var(--color-bg);
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   padding: 30px;
@@ -19,5 +19,5 @@
 .stat-number {
   font-size: 3rem;
   font-weight: 700;
-  color: #007bff;
+  color: var(--accent-blue);
 }

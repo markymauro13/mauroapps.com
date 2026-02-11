@@ -1,0 +1,83 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Theme Toggle - Dark Mode Switch
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.theme-toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  transition: background var(--duration-fast) ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+.theme-toggle-placeholder {
+  width: 40px;
+  height: 40px;
+}
+
+/* Icon Container */
+.theme-toggle-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+/* Sun Icon */
+.sun-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--text-primary);
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.theme-toggle-icon.active .sun-icon {
+  opacity: 0;
+  transform: rotate(180deg) scale(0);
+}
+
+/* Moon Icon */
+.moon-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: rotate(-180deg) scale(0);
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.theme-toggle-icon.active .moon-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+  }
+}

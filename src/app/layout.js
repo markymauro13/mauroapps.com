@@ -10,8 +10,8 @@ import Navbar from "./components/Navbar/Navbar";
 import ScrollHandler from "./components/ScrollHandler";
 
 export const metadata = {
-  title: "Mauro Apps — iOS App Studio",
-  description: "Premium iOS applications crafted with care. Beautiful interfaces, native performance, thoughtful details.",
+  title: "Mauro Apps — App Studio",
+  description: "Premium mobile applications crafted with care. Beautiful interfaces, native performance, thoughtful details.",
 };
 
 // Inter as fallback - closest Google Font to SF Pro
@@ -27,6 +27,17 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('theme') || 
+                             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+              })();
+            `
+          }}
+        />
       </head>
       <body>
         <ScrollHandler />

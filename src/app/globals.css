@@ -24,6 +24,15 @@
    Hero Styles (shared across pages)
    ───────────────────────────────────────────────────────────────────────────── */
 
+html {
+  transition: background-color var(--duration-normal) var(--ease-out-expo);
+}
+
+body {
+  transition: background-color var(--duration-normal) var(--ease-out-expo),
+              color var(--duration-normal) var(--ease-out-expo);
+}
+
 .hero-wrapper {
   min-height: 90vh;
   display: flex;

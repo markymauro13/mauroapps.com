@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   padding: var(--space-5xl) var(--space-xl);
-  background: var(--color-white);
+  background: var(--color-bg);
   position: relative;
 }
 
@@ -63,8 +63,9 @@
   font-size: clamp(40px, 6vw, 56px);
   font-weight: 700;
   letter-spacing: -0.028em;
-  line-height: 1.1;
+  line-height: 1.15;
   color: var(--text-primary);
+  padding-bottom: 2px;
   margin: 0 0 var(--space-lg);
 }
 
@@ -97,7 +98,7 @@
   gap: var(--space-xl);
   margin-top: var(--space-3xl);
   padding-top: var(--space-2xl);
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 1px solid var(--glass-border, rgba(0, 0, 0, 0.06));
 }
 
 .about-value {

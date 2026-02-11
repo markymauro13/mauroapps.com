@@ -1,17 +1,20 @@
 import React from "react";
 import { motion } from "framer-motion";
+import ParticleBackground from "../ParticleBackground/ParticleBackground";
 import "./HeroSection.css";
 
 export default function HeroSection() {
   return (
     <section className="hero-section">
-      <div className="hero-background" aria-hidden="true" />
+      <div className="hero-background" aria-hidden="true">
+        <ParticleBackground />
+      </div>
       
       <div className="hero-content">
         {/* Eyebrow */}
-        <div className="hero-eyebrow">
+        <div className="hero-eyebrow animate-float">
           <span className="hero-eyebrow-dot" />
-          iOS App Studio
+          Cross Platform App Studio
         </div>
         
         {/* Main Title */}
@@ -22,7 +25,7 @@ export default function HeroSection() {
         
         {/* Subtitle */}
         <p className="hero-subtitle">
-          We design and develop premium iOS applications that users love. 
+          We design and develop premium cross platform applications that users love. 
           Intuitive interfaces, powerful features, seamless experiences.
         </p>
         
@@ -30,8 +33,8 @@ export default function HeroSection() {
         <div className="hero-actions">
           <motion.a
             href="#projects"
-            className="btn-primary"
-            whileHover={{ scale: 1.02 }}
+            className="btn-primary tilt-3d"
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
             View Our Apps
@@ -49,7 +52,7 @@ export default function HeroSection() {
           <motion.a
             href="/contact"
             className="btn-secondary"
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.03, x: 2 }}
             whileTap={{ scale: 0.98 }}
           >
             Get in Touch

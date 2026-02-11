@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Container, Nav, Navbar as NavbarBS } from "react-bootstrap";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -53,6 +54,9 @@ export default function Navbar() {
             >
               Contact
             </Nav.Link>
+            <div className="navbar-theme-toggle">
+              <ThemeToggle />
+            </div>
           </Nav>
         </NavbarBS.Collapse>
       </Container>
