@@ -84,10 +84,10 @@ body {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   iOS App Badge
+   App Badge
    ───────────────────────────────────────────────────────────────────────────── */
 
-.ios-badge {
+.app-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -101,13 +101,13 @@ body {
   transition: all var(--duration-normal) var(--ease-out-expo);
 }
 
-.ios-badge:hover {
+.app-badge:hover {
   transform: scale(1.05);
   box-shadow: var(--shadow-lg);
   color: var(--color-white);
 }
 
-.ios-badge svg {
+.app-badge svg {
   width: 20px;
   height: 20px;
 }
