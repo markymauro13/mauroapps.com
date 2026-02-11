@@ -50,3 +50,25 @@ export const WAVE_CONFIG = {
   amplitude: 40,
   frequency: 0.01,
 };
+
+export const LINES_CONFIG = {
+  particleCount: 80,
+  lineDistance: 150, // Increased distance
+  particleSpeed: 0.5,
+  particleSize: 2,
+  lineOpacityMultiplier: 1.0, // Increased
+  particleColor: "rgba(120, 119, 198, 0.6)", // Higher opacity
+  lineColor: "rgba(120, 119, 198, 0.3)", // Higher opacity
+};
+
+export const SHAPES_CONFIG = {
+  shapeCount: 40, // Significant increase
+  minSize: 50,
+  maxSize: 140,
+  minOpacity: 0.2, // Higher visibility
+  maxOpacity: 0.4,
+  speed: 0.3,
+  rotationSpeed: 0.01,
+  types: ["rect", "circle", "triangle"],
+  color: "rgba(120, 119, 198, 0.3)",
+};

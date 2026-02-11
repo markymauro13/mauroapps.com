@@ -7,7 +7,7 @@ import "./AboutSection.css";
 export default function AboutSection() {
   return (
     <section className="about-section">
-      <BackgroundManager type="grid" />
+      <BackgroundManager type="shapes" />
       <Container>
         <motion.div 
           className="about-content"

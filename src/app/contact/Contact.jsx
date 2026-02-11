@@ -6,7 +6,7 @@ import "./Contact.css";
 export default function Contact() {
   return (
     <section className="contact-section">
-      <BackgroundManager type="particles" />
+      <BackgroundManager type="grid" />
       
       <Container>
         <motion.div
