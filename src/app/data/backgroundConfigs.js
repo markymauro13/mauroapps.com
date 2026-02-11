@@ -41,3 +41,12 @@ export const ICON_CONFIG = {
   densityDivisor: 50000, // Pixels per icon
   borderRadiusRatio: 0.22, // Squircle ratio
 };
+
+export const WAVE_CONFIG = {
+  waveCount: 3,
+  waveSpeed: 0.05,
+  waveOpacity: 0.3,
+  colors: ["rgba(120, 119, 198, 0.4)", "rgba(255, 121, 198, 0.3)", "rgba(139, 233, 253, 0.3)"],
+  amplitude: 40,
+  frequency: 0.01,
+};

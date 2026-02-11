@@ -5,6 +5,7 @@ import ParticleBackground from "../ParticleBackground/ParticleBackground";
 import GridBackground from "./GridBackground";
 import BlobBackground from "./BlobBackground";
 import IconBackground from "./IconBackground";
+import WaveBackground from "./WaveBackground";
 import "./BackgroundManager.css";
 
 const BackgroundManager = ({ type = "particles", className = "" }) => {
@@ -18,6 +19,8 @@ const BackgroundManager = ({ type = "particles", className = "" }) => {
         return <BlobBackground />;
       case "icons":
         return <IconBackground />;
+      case "waves":
+        return <WaveBackground />;
       default:
         return <ParticleBackground />;
     }
