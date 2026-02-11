@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
+import BackgroundManager from "../../components/BackgroundManager/BackgroundManager";
 import "./AboutSection.css";
 
 export default function AboutSection() {
   return (
     <section className="about-section">
+      <BackgroundManager type="grid" />
       <Container>
         <motion.div 
           className="about-content"

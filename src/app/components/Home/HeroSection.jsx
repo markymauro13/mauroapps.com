@@ -1,14 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ParticleBackground from "../ParticleBackground/ParticleBackground";
+import BackgroundManager from "../BackgroundManager/BackgroundManager";
 import "./HeroSection.css";
 
 export default function HeroSection() {
   return (
     <section className="hero-section">
-      <div className="hero-background" aria-hidden="true">
-        <ParticleBackground />
-      </div>
+      <BackgroundManager type="particles" />
       
       <div className="hero-content">
         {/* Eyebrow */}

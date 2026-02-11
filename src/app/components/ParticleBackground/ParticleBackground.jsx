@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { PARTICLE_CONFIG } from "../../data/backgroundConfigs";
 import "./ParticleBackground.css";
 
 export default function ParticleBackground() {
@@ -16,7 +17,7 @@ export default function ParticleBackground() {
     const ctx = canvas.getContext("2d");
     let animationFrameId;
     let particles = [];
-    let mouse = { x: null, y: null, radius: 150 };
+    let mouse = { x: null, y: null, radius: PARTICLE_CONFIG.mouseRadius };
 
     const handleMouseMove = (event) => {
       mouse.x = event.x;
@@ -37,7 +38,7 @@ export default function ParticleBackground() {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
+        this.size = Math.random() * (PARTICLE_CONFIG.sizeRange[1] - PARTICLE_CONFIG.sizeRange[0]) + PARTICLE_CONFIG.sizeRange[0];
         this.baseX = this.x;
         this.baseY = this.y;
         this.density = (Math.random() * 30) + 1;
@@ -65,11 +66,11 @@ export default function ParticleBackground() {
           } else {
             if (this.x !== this.baseX) {
               let dx = this.x - this.baseX;
-              this.x -= dx / 20; // Slower return for smoother effect
+              this.x -= dx / PARTICLE_CONFIG.returnSpeed; 
             }
             if (this.y !== this.baseY) {
               let dy = this.y - this.baseY;
-              this.y -= dy / 20;
+              this.y -= dy / PARTICLE_CONFIG.returnSpeed;
             }
           }
         }
@@ -101,7 +102,7 @@ export default function ParticleBackground() {
       }
 
       draw() {
-        ctx.fillStyle = `rgba(120, 119, 198, ${this.opacity})`;
+        ctx.fillStyle = PARTICLE_CONFIG.particleColor.replace("0.5", this.opacity.toString());
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -110,8 +111,8 @@ export default function ParticleBackground() {
 
     const init = () => {
       particles = [];
-      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 15000);
-      for (let i = 0; i < numberOfParticles; i++) {
+      const numberOfOfParticles = Math.floor((canvas.width * canvas.height) / PARTICLE_CONFIG.particleDensity);
+      for (let i = 0; i < numberOfOfParticles; i++) {
         particles.push(new Particle());
       }
     };
@@ -148,5 +149,5 @@ export default function ParticleBackground() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="particle-background" />;
+  return <canvas ref={canvasRef} className="background-animation" />;
 }

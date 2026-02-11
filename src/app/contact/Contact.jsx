@@ -1,11 +1,12 @@
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
+import BackgroundManager from "../components/BackgroundManager/BackgroundManager";
 import "./Contact.css";
 
 export default function Contact() {
   return (
     <section className="contact-section">
-      <div className="contact-background" aria-hidden="true" />
+      <BackgroundManager type="particles" />
       
       <Container>
         <motion.div

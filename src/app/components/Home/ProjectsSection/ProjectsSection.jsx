@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaGithub, FaApple, FaGooglePlay } from "react-icons/fa";
 import { projects } from "../../../data/projects";
+import BackgroundManager from "../../BackgroundManager/BackgroundManager";
 import "./ProjectsSection.css";
 
 export default function ProjectsSection() {
@@ -10,7 +11,8 @@ export default function ProjectsSection() {
 
   return (
     <section className="projects-section" id="projects">
-      <Container fluid className="px-0">
+      <BackgroundManager type="icons" />
+      <Container fluid className="px-0" style={{ position: 'relative', zIndex: 1 }}>
         {/* Section Header */}
         <motion.div 
           className="projects-header"
@@ -100,7 +102,7 @@ function EmptyState() {
       <article className="project-card project-card-compact">
         <div className="project-card-icon-compact">
           <Image
-            src="/assets/dearly_icon.png"
+            src="/assets/dearly-icon.png"
             alt="Dearly"
             width={120}
             height={120}

@@ -2,18 +2,14 @@
    Particle Background - Animated Canvas
    ═══════════════════════════════════════════════════════════════════════════ */
 
-.particle-background {
-  position: absolute;
-  top: 0;
-  left: 0;
+.background-animation {
   width: 100%;
   height: 100%;
-  z-index: 0;
-  pointer-events: none;
+  display: block;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .particle-background {
+  .background-animation {
     display: none;
   }
 }
