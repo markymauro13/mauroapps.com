@@ -104,6 +104,7 @@ function EmptyState() {
             width={120}
             height={120}
             className="dearly-logo"
+            unoptimized
             style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '22px' }}
           />
         </div>
