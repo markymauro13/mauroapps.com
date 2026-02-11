@@ -18,6 +18,18 @@ const LinesBackground = () => {
       canvas.height = window.innerHeight;
     };
 
+    let mouse = { x: null, y: null };
+
+    const handleMouseMove = (event) => {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.x = null;
+      mouse.y = null;
+    };
+
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
@@ -25,9 +37,27 @@ const LinesBackground = () => {
         this.vx = (Math.random() - 0.5) * LINES_CONFIG.particleSpeed;
         this.vy = (Math.random() - 0.5) * LINES_CONFIG.particleSpeed;
         this.size = Math.random() * LINES_CONFIG.particleSize + 1;
+        this.baseX = this.x;
+        this.baseY = this.y;
       }
 
       update() {
+        // Mouse interaction
+        if (LINES_CONFIG.interactive && mouse.x !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < LINES_CONFIG.mouseRadius) {
+            const force = (LINES_CONFIG.mouseRadius - distance) / LINES_CONFIG.mouseRadius;
+            const pushX = (dx / distance) * force * LINES_CONFIG.mousePush * 5;
+            const pushY = (dy / distance) * force * LINES_CONFIG.mousePush * 5;
+            
+            this.x -= pushX;
+            this.y -= pushY;
+          }
+        }
+
         this.x += this.vx;
         this.y += this.vy;
 
@@ -95,9 +125,13 @@ const LinesBackground = () => {
     };
 
     window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseout", handleMouseLeave);
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseout", handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

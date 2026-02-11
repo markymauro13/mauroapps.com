@@ -6,6 +6,7 @@
 export const PARTICLE_CONFIG = {
   particleDensity: 15000, // Higher number = fewer particles (pixel area per particle)
   particleColor: "rgba(120, 119, 198, 0.5)",
+  interactive: true,
   mouseRadius: 150,
   returnSpeed: 20, // Lower = faster return
   sizeRange: [1, 4], // [min, max]
@@ -17,10 +18,15 @@ export const GRID_CONFIG = {
   lineColorLight: "rgba(120, 119, 198, 0.15)",
   lineColorDark: "rgba(120, 119, 198, 0.25)",
   lineWidth: 1,
+  interactive: true,
+  mouseRadius: 200,
+  distortionStrength: 0.2,
 };
 
 export const BLOB_CONFIG = {
   blurAmount: "100px",
+  interactive: true,
+  mousePull: 0.005,
   blobs: [
     { x: 0.2, y: 0.2, radius: 200, color: "rgba(120, 119, 198, 0.3)", vx: 0.001, vy: 0.0015 },
     { x: 0.8, y: 0.3, radius: 300, color: "rgba(255, 121, 198, 0.2)", vx: -0.0012, vy: 0.001 },
@@ -40,6 +46,9 @@ export const ICON_CONFIG = {
   opacityRange: [0.05, 0.2],
   densityDivisor: 50000, // Pixels per icon
   borderRadiusRatio: 0.22, // Squircle ratio
+  interactive: true,
+  mousePush: 1.5,
+  pushRadius: 150,
 };
 
 export const WAVE_CONFIG = {
@@ -49,6 +58,8 @@ export const WAVE_CONFIG = {
   colors: ["rgba(120, 119, 198, 0.4)", "rgba(255, 121, 198, 0.3)", "rgba(139, 233, 253, 0.3)"],
   amplitude: 40,
   frequency: 0.01,
+  interactive: true,
+  mouseInfluence: 30,
 };
 
 export const LINES_CONFIG = {
@@ -59,6 +70,9 @@ export const LINES_CONFIG = {
   lineOpacityMultiplier: 1.0, // Increased
   particleColor: "rgba(120, 119, 198, 0.6)", // Higher opacity
   lineColor: "rgba(120, 119, 198, 0.3)", // Higher opacity
+  interactive: true,
+  mouseRadius: 150,
+  mousePush: 2,
 };
 
 export const SHAPES_CONFIG = {
@@ -71,4 +85,7 @@ export const SHAPES_CONFIG = {
   rotationSpeed: 0.01,
   types: ["rect", "circle", "triangle"],
   color: "rgba(120, 119, 198, 0.3)",
+  interactive: true,
+  mouseAvoid: 2,
+  avoidRadius: 200,
 };

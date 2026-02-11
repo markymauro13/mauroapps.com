@@ -32,6 +32,18 @@ const IconBackground = () => {
       canvas.height = window.innerHeight;
     };
 
+    let mouse = { x: null, y: null };
+
+    const handleMouseMove = (event) => {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.x = null;
+      mouse.y = null;
+    };
+
     class FloatingIcon {
       constructor(img) {
         this.img = img;
@@ -46,6 +58,22 @@ const IconBackground = () => {
       }
 
       update() {
+        // Mouse interaction
+        if (ICON_CONFIG.interactive && mouse.x !== null) {
+          const dx = mouse.x - (this.x + this.size / 2);
+          const dy = mouse.y - (this.y + this.size / 2);
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < ICON_CONFIG.pushRadius) {
+            const force = (ICON_CONFIG.pushRadius - distance) / ICON_CONFIG.pushRadius;
+            const pushX = (dx / distance) * force * ICON_CONFIG.mousePush * 5;
+            const pushY = (dy / distance) * force * ICON_CONFIG.mousePush * 5;
+            
+            this.x -= pushX;
+            this.y -= pushY;
+          }
+        }
+
         this.x += this.vx;
         this.y += this.vy;
         this.angle += this.va;
@@ -116,8 +144,6 @@ const IconBackground = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // If images aren't all loaded yet, we might still want to start with placeholders
-      // OR wait for at least one image.
       floatingIcons.forEach(icon => {
         icon.update();
         icon.draw();
@@ -139,9 +165,13 @@ const IconBackground = () => {
     };
 
     window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseout", handleMouseLeave);
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseout", handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

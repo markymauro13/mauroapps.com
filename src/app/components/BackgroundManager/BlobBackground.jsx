@@ -20,18 +20,36 @@ const BlobBackground = () => {
 
     const blobs = BLOB_CONFIG.blobs;
 
+    let mouse = { x: null, y: null };
+
+    const handleMouseMove = (event) => {
+      mouse.x = event.x / canvas.width;
+      mouse.y = event.y / canvas.height;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.x = null;
+      mouse.y = null;
+    };
+
     const animate = (t) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.filter = `blur(${BLOB_CONFIG.blurAmount})`;
 
       blobs.forEach(blob => {
-        // Update positions based on time
-        const x = ((blob.x + t * blob.vx) % 1.2 + 1.2) % 1.2 - 0.1;
-        const y = ((blob.y + t * blob.vy) % 1.2 + 1.2) % 1.2 - 0.1;
+        // Base movement
+        let targetX = ((blob.x + t * blob.vx) % 1.2 + 1.2) % 1.2 - 0.1;
+        let targetY = ((blob.y + t * blob.vy) % 1.2 + 1.2) % 1.2 - 0.1;
+
+        // Mouse interaction
+        if (BLOB_CONFIG.interactive && mouse.x !== null) {
+          targetX += (mouse.x - targetX) * BLOB_CONFIG.mousePull;
+          targetY += (mouse.y - targetY) * BLOB_CONFIG.mousePull;
+        }
 
         ctx.fillStyle = blob.color;
         ctx.beginPath();
-        ctx.arc(x * canvas.width, y * canvas.height, blob.radius, 0, Math.PI * 2);
+        ctx.arc(targetX * canvas.width, targetY * canvas.height, blob.radius, 0, Math.PI * 2);
         ctx.fill();
       });
 
@@ -46,9 +64,13 @@ const BlobBackground = () => {
     };
 
     window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseout", handleMouseLeave);
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseout", handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

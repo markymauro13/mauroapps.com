@@ -18,6 +18,18 @@ const ShapesBackground = () => {
       canvas.height = window.innerHeight;
     };
 
+    let mouse = { x: null, y: null };
+
+    const handleMouseMove = (event) => {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.x = null;
+      mouse.y = null;
+    };
+
     class Shape {
       constructor() {
         this.type = SHAPES_CONFIG.types[Math.floor(Math.random() * SHAPES_CONFIG.types.length)];
@@ -32,6 +44,22 @@ const ShapesBackground = () => {
       }
 
       update() {
+        // Mouse interaction
+        if (SHAPES_CONFIG.interactive && mouse.x !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < SHAPES_CONFIG.avoidRadius) {
+            const force = (SHAPES_CONFIG.avoidRadius - distance) / SHAPES_CONFIG.avoidRadius;
+            const pushX = (dx / distance) * force * SHAPES_CONFIG.mouseAvoid * 5;
+            const pushY = (dy / distance) * force * SHAPES_CONFIG.mouseAvoid * 5;
+            
+            this.x -= pushX;
+            this.y -= pushY;
+          }
+        }
+
         this.x += this.vx;
         this.y += this.vy;
         this.angle += this.va;
@@ -103,9 +131,13 @@ const ShapesBackground = () => {
     };
 
     window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseout", handleMouseLeave);
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseout", handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

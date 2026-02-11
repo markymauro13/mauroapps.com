@@ -18,6 +18,18 @@ const GridBackground = () => {
       canvas.height = window.innerHeight;
     };
 
+    let mouse = { x: null, y: null };
+
+    const handleMouseMove = (event) => {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.x = null;
+      mouse.y = null;
+    };
+
     const drawGrid = (t) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
@@ -33,16 +45,46 @@ const GridBackground = () => {
       // Vertical lines
       for (let x = offset; x < canvas.width; x += gridSize) {
         ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
+        for (let y = 0; y < canvas.height; y += 10) {
+          let drawX = x;
+          let drawY = y;
+
+          if (GRID_CONFIG.interactive && mouse.x !== null) {
+            const dx = mouse.x - x;
+            const dy = mouse.y - y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < GRID_CONFIG.mouseRadius) {
+              const force = (GRID_CONFIG.mouseRadius - distance) / GRID_CONFIG.mouseRadius;
+              drawX -= dx * force * GRID_CONFIG.distortionStrength;
+            }
+          }
+          
+          if (y === 0) ctx.moveTo(drawX, drawY);
+          else ctx.lineTo(drawX, drawY);
+        }
         ctx.stroke();
       }
 
       // Horizontal lines
       for (let y = offset; y < canvas.height; y += gridSize) {
         ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
+        for (let x = 0; x < canvas.width; x += 10) {
+          let drawX = x;
+          let drawY = y;
+
+          if (GRID_CONFIG.interactive && mouse.x !== null) {
+            const dx = mouse.x - x;
+            const dy = mouse.y - y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < GRID_CONFIG.mouseRadius) {
+              const force = (GRID_CONFIG.mouseRadius - distance) / GRID_CONFIG.mouseRadius;
+              drawY -= dy * force * GRID_CONFIG.distortionStrength;
+            }
+          }
+          
+          if (x === 0) ctx.moveTo(drawX, drawY);
+          else ctx.lineTo(drawX, drawY);
+        }
         ctx.stroke();
       }
     };
@@ -60,9 +102,13 @@ const GridBackground = () => {
     };
 
     window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseout", handleMouseLeave);
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseout", handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
