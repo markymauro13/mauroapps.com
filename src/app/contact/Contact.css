@@ -3,7 +3,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .contact-section {
-  min-height: 85vh;
+  min-height: 85svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -119,7 +119,7 @@
 
 @media (max-width: 768px) {
   .contact-section {
-    min-height: 75vh;
+    min-height: 75svh;
     padding: var(--space-3xl) var(--space-lg);
   }
   

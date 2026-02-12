@@ -111,6 +111,8 @@ const GridBackground = () => {
     animate(0);
 
     const handleResize = () => {
+      const newWidth = parent.getBoundingClientRect().width;
+      if (isMobile && Math.abs(newWidth - lastWidth) < 1) return;
       const prevWidth = lastWidth;
       updateCanvasSize();
       lastWidth = canvas.width;

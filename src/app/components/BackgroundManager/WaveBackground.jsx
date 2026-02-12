@@ -14,6 +14,7 @@ const WaveBackground = () => {
     const ctx = canvas.getContext("2d");
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
     let animationFrameId;
+    let lastWidth = 0;
 
     const updateCanvasSize = () => {
       const rect = parent.getBoundingClientRect();
@@ -83,10 +84,14 @@ const WaveBackground = () => {
     };
 
     updateCanvasSize();
+    lastWidth = canvas.width;
     animate(0);
 
     const handleResize = () => {
+      const newWidth = parent.getBoundingClientRect().width;
+      if (isMobile && Math.abs(newWidth - lastWidth) < 1) return;
       updateCanvasSize();
+      lastWidth = canvas.width;
     };
 
     window.addEventListener("resize", handleResize);
