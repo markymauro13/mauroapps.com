@@ -88,4 +88,5 @@ export const SHAPES_CONFIG = {
   interactive: true,
   mouseAvoid: 2.5,
   avoidRadius: 250,
+  mobileShapeCount: 15,
 };

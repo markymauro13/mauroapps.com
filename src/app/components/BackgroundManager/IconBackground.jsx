@@ -131,9 +131,30 @@ const IconBackground = () => {
     const initWithImages = (icons) => {
       floatingIcons = [];
       if (icons.length === 0) return;
-      const count = Math.floor((canvas.width * canvas.height) / ICON_CONFIG.densityDivisor);
+
+      const densityDivisor = isMobile ? ICON_CONFIG.densityDivisor * 1.5 : ICON_CONFIG.densityDivisor;
+      const count = Math.floor((canvas.width * canvas.height) / densityDivisor);
+      
+      const cols = Math.ceil(Math.sqrt(count * (canvas.width / canvas.height)));
+      const rows = Math.ceil(count / cols);
+      const cellWidth = canvas.width / cols;
+      const cellHeight = canvas.height / rows;
+
       for (let i = 0; i < count; i++) {
-        floatingIcons.push(new FloatingIcon(icons[i % icons.length]));
+        const icon = new FloatingIcon(icons[i % icons.length]);
+        
+        // Grid-based positioning with randomness within the cell
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        
+        icon.x = col * cellWidth + Math.random() * (cellWidth - icon.size);
+        icon.y = row * cellHeight + Math.random() * (cellHeight - icon.size);
+        
+        // Ensure within bounds
+        if (icon.x < 0) icon.x = 0;
+        if (icon.y < 0) icon.y = 0;
+
+        floatingIcons.push(icon);
       }
     };
 

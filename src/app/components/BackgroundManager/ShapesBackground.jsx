@@ -122,7 +122,8 @@ const ShapesBackground = () => {
     let shapes = [];
     const init = () => {
       shapes = [];
-      for (let i = 0; i < SHAPES_CONFIG.shapeCount; i++) {
+      const count = isMobile ? SHAPES_CONFIG.mobileShapeCount || 20 : SHAPES_CONFIG.shapeCount;
+      for (let i = 0; i < count; i++) {
         shapes.push(new Shape());
       }
     };
