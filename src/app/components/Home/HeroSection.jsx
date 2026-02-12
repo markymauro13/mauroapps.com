@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import BackgroundManager from "../BackgroundManager/BackgroundManager";
 import "./HeroSection.css";
 
 export default function HeroSection() {
+  const [scrollOpacity, setScrollOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const newOpacity = Math.max(0, 1 - scrollPosition / 100);
+      setScrollOpacity(newOpacity);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className="hero-section">
       <BackgroundManager type="particles" />
@@ -59,10 +72,20 @@ export default function HeroSection() {
       </div>
       
       {/* Scroll Indicator */}
-      <div className="scroll-indicator">
-        <span className="scroll-indicator-text">Scroll</span>
-        <div className="scroll-indicator-line" />
-      </div>
+      <motion.div 
+        className="scroll-indicator"
+        style={{ opacity: scrollOpacity }}
+      >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 1 }}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}
+        >
+          <span className="scroll-indicator-text">Scroll</span>
+          <div className="scroll-indicator-line" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
