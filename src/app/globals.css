@@ -34,7 +34,7 @@ body {
 }
 
 .hero-wrapper {
-  min-height: 90dvh;
+  min-height: 90svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -157,7 +157,7 @@ a:hover {
 
 @media (max-width: 768px) {
   .hero-wrapper {
-    min-height: 80dvh;
+    min-height: 80svh;
     padding: var(--space-3xl) var(--space-lg);
   }
   
@@ -169,6 +169,6 @@ a:hover {
 
 @media (max-width: 480px) {
   .hero-wrapper {
-    min-height: 70dvh;
+    min-height: 70svh;
   }
 }

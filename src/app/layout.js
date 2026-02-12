@@ -14,6 +14,12 @@ export const metadata = {
   description: "Premium mobile applications crafted with care. Beautiful interfaces, native performance, thoughtful details.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  interactiveWidget: "resizes-visual",
+};
+
 // Inter as fallback - closest Google Font to SF Pro
 const inter = Inter({
   subsets: ["latin"],
