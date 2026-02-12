@@ -132,7 +132,7 @@ const IconBackground = () => {
       floatingIcons = [];
       if (icons.length === 0) return;
 
-      const densityDivisor = isMobile ? ICON_CONFIG.densityDivisor * 1.5 : ICON_CONFIG.densityDivisor;
+      const densityDivisor = isMobile ? (ICON_CONFIG.mobileDensityDivisor || ICON_CONFIG.densityDivisor * 1.5) : ICON_CONFIG.densityDivisor;
       const count = Math.floor((canvas.width * canvas.height) / densityDivisor);
       
       const cols = Math.ceil(Math.sqrt(count * (canvas.width / canvas.height)));

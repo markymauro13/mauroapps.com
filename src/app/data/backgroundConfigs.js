@@ -45,6 +45,7 @@ export const ICON_CONFIG = {
   rotationSpeedRange: [-0.01, 0.01],
   opacityRange: [0.1, 0.3],
   densityDivisor: 50000,
+  mobileDensityDivisor: 25000,
   borderRadiusRatio: 0.22,
   interactive: true,
   mousePush: 1.8,
