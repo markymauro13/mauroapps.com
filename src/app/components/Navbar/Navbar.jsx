@@ -52,15 +52,45 @@ export default function Navbar() {
     return pathname.startsWith(path);
   };
 
-  const handleLinkClick = (h) => {
-    setHash(h);
+  const handleLinkClick = (e, path) => {
     setExpanded(false);
+
+    // If it's a hash link on the home page
+    if (path === '/#projects' && pathname === '/') {
+      e.preventDefault();
+      
+      // Update hash manually without jumping
+      window.history.pushState(null, '', '#projects');
+      setHash('#projects');
+      
+      // Handle scroll
+      const element = document.getElementById('projects');
+      if (element) {
+        const isMobile = window.matchMedia("(max-width: 991px)").matches;
+        const offset = isMobile ? 100 : 80;
+        const y = element.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    } else if (path === '/' && pathname === '/') {
+      // Handle clicking "Home" while on home page
+      e.preventDefault();
+      window.history.pushState(null, '', '/');
+      setHash('');
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // For other links, just update hash state (Next.js Link handles navigation)
+      if (path.includes('#')) {
+        setHash(path.substring(path.indexOf('#')));
+      } else {
+        setHash('');
+      }
+    }
   };
 
   return (
     <NavbarBS ref={navRef} expand="lg" className="navbar-light" expanded={expanded} onToggle={setExpanded}>
       <Container fluid>
-        <Link href="/" className="navbar-brand" passHref onClick={() => handleLinkClick("")}>
+        <Link href="/" className="navbar-brand" passHref onClick={(e) => handleLinkClick(e, "/")}>
           <img 
             src="/assets/logo.png" 
             alt="Mauro Apps" 
@@ -74,7 +104,7 @@ export default function Navbar() {
               as={Link} 
               href="/" 
               className={isActive('/') ? 'active' : ''}
-              onClick={() => handleLinkClick("")}
+              onClick={(e) => handleLinkClick(e, "/")}
             >
               Home
             </Nav.Link>
@@ -82,7 +112,7 @@ export default function Navbar() {
               as={Link} 
               href="/about"
               className={isActive('/about') ? 'active' : ''}
-              onClick={() => handleLinkClick("")}
+              onClick={(e) => handleLinkClick(e, "/about")}
             >
               About
             </Nav.Link>
@@ -90,7 +120,7 @@ export default function Navbar() {
               as={Link} 
               href="/#projects"
               className={isActive('/#projects') ? 'active' : ''}
-              onClick={() => handleLinkClick("#projects")}
+              onClick={(e) => handleLinkClick(e, "/#projects")}
             >
               Apps
             </Nav.Link>
@@ -98,7 +128,7 @@ export default function Navbar() {
               as={Link} 
               href="/contact"
               className={isActive('/contact') ? 'active' : ''}
-              onClick={() => handleLinkClick("")}
+              onClick={(e) => handleLinkClick(e, "/contact")}
             >
               Contact
             </Nav.Link>

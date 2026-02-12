@@ -3,8 +3,6 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-const NAVBAR_OFFSET = 80;
-
 export default function ScrollHandler() {
   const pathname = usePathname();
 
@@ -14,7 +12,10 @@ export default function ScrollHandler() {
       const element = document.getElementById(hash.substring(1));
       if (element) {
         setTimeout(() => {
-          const y = element.getBoundingClientRect().top + window.scrollY - NAVBAR_OFFSET;
+          const isMobile = window.matchMedia("(max-width: 991px)").matches;
+          const offset = isMobile ? 100 : 80;
+
+          const y = element.getBoundingClientRect().top + window.scrollY - offset;
           window.scrollTo({ top: y, behavior: "smooth" });
         }, 0);
       }
