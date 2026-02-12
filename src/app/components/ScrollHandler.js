@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { scrollToElement } from "../utils/scroll";
 
 export default function ScrollHandler() {
   const pathname = usePathname();
@@ -9,16 +10,10 @@ export default function ScrollHandler() {
   useEffect(() => {
     const hash = window.location.hash;
     if (hash) {
-      const element = document.getElementById(hash.substring(1));
-      if (element) {
-        setTimeout(() => {
-          const isMobile = window.matchMedia("(max-width: 991px)").matches;
-          const offset = isMobile ? 100 : 80;
-
-          const y = element.getBoundingClientRect().top + window.scrollY - offset;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }, 0);
-      }
+      const elementId = hash.substring(1);
+      setTimeout(() => {
+        scrollToElement(elementId);
+      }, 0);
     }
   }, [pathname]);
 

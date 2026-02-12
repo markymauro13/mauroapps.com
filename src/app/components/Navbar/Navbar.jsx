@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Container, Nav, Navbar as NavbarBS } from "react-bootstrap";
+import { scrollToElement } from "../../utils/scroll";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import "./Navbar.css";
 
@@ -63,14 +64,10 @@ export default function Navbar() {
       window.history.pushState(null, '', '#projects');
       setHash('#projects');
       
-      // Handle scroll
-      const element = document.getElementById('projects');
-      if (element) {
-        const isMobile = window.matchMedia("(max-width: 991px)").matches;
-        const offset = isMobile ? 100 : 80;
-        const y = element.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
+      // Handle scroll with delay to allow navbar state to settle
+      setTimeout(() => {
+        scrollToElement('projects');
+      }, 0);
     } else if (path === '/' && pathname === '/') {
       // Handle clicking "Home" while on home page
       e.preventDefault();
