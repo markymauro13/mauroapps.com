@@ -3,7 +3,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .hero-section {
-  min-height: 100svh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -226,7 +226,7 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    min-height: 85svh;
+    min-height: 85dvh;
     padding: var(--space-3xl) var(--space-lg);
   }
   
@@ -258,7 +258,7 @@
 
 @media (max-width: 480px) {
   .hero-section {
-    min-height: 80svh;
+    min-height: 80dvh;
   }
   
   .hero-title-text,

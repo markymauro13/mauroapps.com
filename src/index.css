@@ -156,6 +156,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  overflow-anchor: auto;
   font-family: var(--font-system);
   font-size: 17px;
   font-weight: 400;

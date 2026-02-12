@@ -3,7 +3,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .about-section {
-  min-height: 80svh;
+  min-height: 80dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
