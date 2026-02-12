@@ -9,21 +9,26 @@ const ShapesBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const parent = canvas.parentElement;
 
     const ctx = canvas.getContext("2d");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
     let animationFrameId;
+    let lastWidth = 0;
 
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const rect = parent.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
     };
 
     let mouse = { x: null, y: null };
     let smoothMouse = { x: 0, y: 0, active: false };
 
     const handleMouseMove = (event) => {
-      mouse.x = event.x;
-      mouse.y = event.y;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = event.clientX - rect.left;
+      mouse.y = event.clientY - rect.top;
       smoothMouse.active = true;
     };
 
@@ -46,7 +51,6 @@ const ShapesBackground = () => {
       }
 
       update() {
-        // Mouse interaction (Smoother with momentum)
         if (SHAPES_CONFIG.interactive && smoothMouse.active) {
           const dx = smoothMouse.x - this.x;
           const dy = smoothMouse.y - this.y;
@@ -62,7 +66,6 @@ const ShapesBackground = () => {
           }
         }
 
-        // Relaxed physics
         this.vx *= 0.99;
         this.vy *= 0.99;
         this.angle += this.va;
@@ -88,7 +91,6 @@ const ShapesBackground = () => {
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle);
         
-        // Use color from config or fallback
         const colorBase = SHAPES_CONFIG.color || "rgba(120, 119, 198, ";
         ctx.strokeStyle = colorBase.includes("rgba") 
           ? colorBase.replace(/[\d.]+\)$/g, `${this.opacity})`)
@@ -128,7 +130,6 @@ const ShapesBackground = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Lerp smooth mouse
       if (mouse.x !== null) {
         smoothMouse.x += (mouse.x - smoothMouse.x) * 0.2;
         smoothMouse.y += (mouse.y - smoothMouse.y) * 0.2;
@@ -144,17 +145,24 @@ const ShapesBackground = () => {
     };
 
     updateCanvasSize();
+    lastWidth = canvas.width;
     init();
     animate();
 
     const handleResize = () => {
+      const prevWidth = lastWidth;
       updateCanvasSize();
-      init();
+      lastWidth = canvas.width;
+      if (Math.abs(canvas.width - prevWidth) > 100) {
+        init();
+      }
     };
 
     window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseout", handleMouseLeave);
+    if (!isMobile) {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseout", handleMouseLeave);
+    }
 
     return () => {
       window.removeEventListener("resize", handleResize);

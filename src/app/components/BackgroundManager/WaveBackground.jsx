@@ -9,21 +9,25 @@ const WaveBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const parent = canvas.parentElement;
 
     const ctx = canvas.getContext("2d");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
     let animationFrameId;
 
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const rect = parent.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
     };
 
     let mouse = { x: null, y: null };
     let smoothMouse = { x: 0, y: 0, active: false };
 
     const handleMouseMove = (event) => {
-      mouse.x = event.x;
-      mouse.y = event.y;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = event.clientX - rect.left;
+      mouse.y = event.clientY - rect.top;
       smoothMouse.active = true;
     };
 
@@ -35,7 +39,6 @@ const WaveBackground = () => {
     const animate = (t) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Lerp smooth mouse
       if (mouse.x !== null) {
         smoothMouse.x += (mouse.x - smoothMouse.x) * 0.2;
         smoothMouse.y += (mouse.y - smoothMouse.y) * 0.2;
@@ -59,7 +62,6 @@ const WaveBackground = () => {
             const dist = Math.abs(x - smoothMouse.x);
             if (dist < 250) {
               const force = (250 - dist) / 250;
-              // Organic bell curve
               const smoothForce = Math.pow(force, 2);
               mouseDip = smoothForce * mouseInfluence;
             }
@@ -88,8 +90,10 @@ const WaveBackground = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseout", handleMouseLeave);
+    if (!isMobile) {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseout", handleMouseLeave);
+    }
 
     return () => {
       window.removeEventListener("resize", handleResize);

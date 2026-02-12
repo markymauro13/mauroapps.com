@@ -9,35 +9,28 @@ const IconBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const parent = canvas.parentElement;
 
     const ctx = canvas.getContext("2d");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
     let animationFrameId;
+    let lastWidth = 0;
 
     const iconPaths = ICON_CONFIG.iconPaths;
 
-    // Preload images
-    let loadedImages = 0;
-    const icons = [];
-    iconPaths.forEach((path) => {
-      const img = new Image();
-      img.src = path;
-      img.onload = () => {
-        loadedImages++;
-        icons.push(img);
-      };
-    });
-
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const rect = parent.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
     };
 
     let mouse = { x: null, y: null };
     let smoothMouse = { x: 0, y: 0, active: false };
 
     const handleMouseMove = (event) => {
-      mouse.x = event.x;
-      mouse.y = event.y;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = event.clientX - rect.left;
+      mouse.y = event.clientY - rect.top;
       smoothMouse.active = true;
     };
 
@@ -60,7 +53,6 @@ const IconBackground = () => {
       }
 
       update() {
-        // Mouse interaction (Smoother with momentum)
         if (ICON_CONFIG.interactive && smoothMouse.active) {
           const dx = smoothMouse.x - (this.x + this.size / 2);
           const dy = smoothMouse.y - (this.y + this.size / 2);
@@ -76,7 +68,6 @@ const IconBackground = () => {
           }
         }
 
-        // Relaxed physics
         this.vx *= 0.99;
         this.vy *= 0.99;
         this.angle += this.va;
@@ -98,6 +89,8 @@ const IconBackground = () => {
       }
 
       draw() {
+        if (!this.img) return;
+
         ctx.save();
         ctx.globalAlpha = this.opacity;
         ctx.translate(this.x + this.size / 2, this.y + this.size / 2);
@@ -105,12 +98,10 @@ const IconBackground = () => {
         
         const borderRadius = this.size * ICON_CONFIG.borderRadiusRatio;
 
-        // Create rounded path
         ctx.beginPath();
         if (ctx.roundRect) {
           ctx.roundRect(-this.size / 2, -this.size / 2, this.size, this.size, borderRadius);
         } else {
-          // Fallback for older browsers
           const x = -this.size / 2;
           const y = -this.size / 2;
           const w = this.size;
@@ -129,15 +120,7 @@ const IconBackground = () => {
         ctx.closePath();
         ctx.clip();
 
-        // Use icon or placeholder
-        if (this.img) {
-          ctx.drawImage(this.img, -this.size / 2, -this.size / 2, this.size, this.size);
-        } else {
-          ctx.font = `${this.size}px Arial`;
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText('📱', 0, 0);
-        }
+        ctx.drawImage(this.img, -this.size / 2, -this.size / 2, this.size, this.size);
         
         ctx.restore();
       }
@@ -145,19 +128,18 @@ const IconBackground = () => {
 
     let floatingIcons = [];
 
-    const init = () => {
+    const initWithImages = (icons) => {
       floatingIcons = [];
+      if (icons.length === 0) return;
       const count = Math.floor((canvas.width * canvas.height) / ICON_CONFIG.densityDivisor);
       for (let i = 0; i < count; i++) {
-        const img = icons.length > 0 ? icons[Math.floor(Math.random() * icons.length)] : null;
-        floatingIcons.push(new FloatingIcon(img));
+        floatingIcons.push(new FloatingIcon(icons[i % icons.length]));
       }
     };
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Lerp smooth mouse
       if (mouse.x !== null) {
         smoothMouse.x += (mouse.x - smoothMouse.x) * 0.2;
         smoothMouse.y += (mouse.y - smoothMouse.y) * 0.2;
@@ -174,23 +156,46 @@ const IconBackground = () => {
     };
 
     updateCanvasSize();
-    // Give images a moment to load before initializing
-    setTimeout(() => {
-      init();
+    lastWidth = canvas.width;
+
+    // Load all images before initializing
+    const loadPromises = iconPaths.map((path) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.src = path;
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+      });
+    });
+
+    Promise.all(loadPromises).then((results) => {
+      const icons = results.filter(Boolean);
+      initWithImages(icons);
       animate();
-    }, 100);
 
-    const handleResize = () => {
-      updateCanvasSize();
-      init();
-    };
+      // Store icons ref for resize
+      const handleResize = () => {
+        const prevWidth = lastWidth;
+        updateCanvasSize();
+        lastWidth = canvas.width;
+        if (Math.abs(canvas.width - prevWidth) > 100) {
+          initWithImages(icons);
+        }
+      };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseout", handleMouseLeave);
+      window.addEventListener("resize", handleResize);
+      canvas._handleResize = handleResize;
+    });
+
+    if (!isMobile) {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseout", handleMouseLeave);
+    }
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      if (canvas._handleResize) {
+        window.removeEventListener("resize", canvas._handleResize);
+      }
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseout", handleMouseLeave);
       cancelAnimationFrame(animationFrameId);

@@ -9,13 +9,16 @@ const BlobBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const parent = canvas.parentElement;
 
     const ctx = canvas.getContext("2d");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
     let animationFrameId;
 
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const rect = parent.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
     };
 
     const blobs = BLOB_CONFIG.blobs;
@@ -24,8 +27,9 @@ const BlobBackground = () => {
     let smoothMouse = { x: 0.5, y: 0.5, active: false };
 
     const handleMouseMove = (event) => {
-      mouse.x = event.x / canvas.width;
-      mouse.y = event.y / canvas.height;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = (event.clientX - rect.left) / canvas.width;
+      mouse.y = (event.clientY - rect.top) / canvas.height;
       smoothMouse.active = true;
     };
 
@@ -38,20 +42,17 @@ const BlobBackground = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.filter = `blur(${BLOB_CONFIG.blurAmount})`;
 
-      // Lerp smooth mouse
       if (mouse.x !== null) {
-        smoothMouse.x += (mouse.x - smoothMouse.x) * 0.1; // Snappier but still weighted
+        smoothMouse.x += (mouse.x - smoothMouse.x) * 0.1;
         smoothMouse.y += (mouse.y - smoothMouse.y) * 0.1;
       } else {
         smoothMouse.active = false;
       }
 
       blobs.forEach(blob => {
-        // Base movement
         let targetX = ((blob.x + t * blob.vx) % 1.2 + 1.2) % 1.2 - 0.1;
         let targetY = ((blob.y + t * blob.vy) % 1.2 + 1.2) % 1.2 - 0.1;
 
-        // Mouse interaction (Smoother pull)
         if (BLOB_CONFIG.interactive && smoothMouse.active) {
           targetX += (smoothMouse.x - targetX) * BLOB_CONFIG.mousePull;
           targetY += (smoothMouse.y - targetY) * BLOB_CONFIG.mousePull;
@@ -74,8 +75,10 @@ const BlobBackground = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseout", handleMouseLeave);
+    if (!isMobile) {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseout", handleMouseLeave);
+    }
 
     return () => {
       window.removeEventListener("resize", handleResize);

@@ -13,16 +13,20 @@ export default function ParticleBackground() {
 
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const parent = canvas.parentElement;
 
     const ctx = canvas.getContext("2d");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
     let animationFrameId;
     let particles = [];
     let mouse = { x: null, y: null, radius: PARTICLE_CONFIG.mouseRadius };
     let smoothMouse = { x: 0, y: 0, active: false };
+    let lastWidth = 0;
 
     const handleMouseMove = (event) => {
-      mouse.x = event.x;
-      mouse.y = event.y;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = event.clientX - rect.left;
+      mouse.y = event.clientY - rect.top;
       smoothMouse.active = true;
     };
 
@@ -32,8 +36,9 @@ export default function ParticleBackground() {
     };
 
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const rect = parent.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
     };
 
     class Particle {
@@ -52,17 +57,14 @@ export default function ParticleBackground() {
       }
 
       update() {
-        // Simple drift
         this.baseX += this.speedX;
         this.baseY += this.speedY;
 
-        // Wrap base position
         if (this.baseX < 0) this.baseX = canvas.width;
         else if (this.baseX > canvas.width) this.baseX = 0;
         if (this.baseY < 0) this.baseY = canvas.height;
         else if (this.baseY > canvas.height) this.baseY = 0;
 
-        // Mouse interaction (Smoother with momentum)
         if (PARTICLE_CONFIG.interactive && smoothMouse.active) {
           let dx = smoothMouse.x - this.x;
           let dy = smoothMouse.y - this.y;
@@ -70,7 +72,6 @@ export default function ParticleBackground() {
           
           if (distance < mouse.radius) {
             const force = (mouse.radius - distance) / mouse.radius;
-            // Push particles away from smoothed mouse
             const pushX = (dx / distance) * force * this.density * 0.05;
             const pushY = (dy / distance) * force * this.density * 0.05;
             this.vx -= pushX;
@@ -78,15 +79,20 @@ export default function ParticleBackground() {
           }
         }
 
-        // Return force (Gentle spring to baseX/Y)
         const dxBase = this.baseX - this.x;
         const dyBase = this.baseY - this.y;
         this.vx += dxBase / PARTICLE_CONFIG.returnSpeed;
         this.vy += dyBase / PARTICLE_CONFIG.returnSpeed;
 
-        // Friction/Damping
         this.vx *= 0.95;
         this.vy *= 0.95;
+
+        const totalSpeed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        const maxSpeed = 3;
+        if (totalSpeed > maxSpeed) {
+          this.vx = (this.vx / totalSpeed) * maxSpeed;
+          this.vy = (this.vy / totalSpeed) * maxSpeed;
+        }
 
         this.x += this.vx;
         this.y += this.vy;
@@ -111,7 +117,6 @@ export default function ParticleBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Lerp smooth mouse
       if (mouse.x !== null) {
         smoothMouse.x += (mouse.x - smoothMouse.x) * 0.2;
         smoothMouse.y += (mouse.y - smoothMouse.y) * 0.2;
@@ -128,17 +133,24 @@ export default function ParticleBackground() {
     };
 
     updateCanvasSize();
+    lastWidth = canvas.width;
     init();
     animate();
 
     const handleResize = () => {
+      const prevWidth = lastWidth;
       updateCanvasSize();
-      init();
+      lastWidth = canvas.width;
+      if (Math.abs(canvas.width - prevWidth) > 100) {
+        init();
+      }
     };
 
     window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseout", handleMouseLeave);
+    if (!isMobile) {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseout", handleMouseLeave);
+    }
 
     return () => {
       window.removeEventListener("resize", handleResize);

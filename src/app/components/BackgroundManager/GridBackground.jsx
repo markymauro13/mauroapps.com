@@ -9,21 +9,26 @@ const GridBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const parent = canvas.parentElement;
 
     const ctx = canvas.getContext("2d");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
     let animationFrameId;
+    let lastWidth = 0;
 
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const rect = parent.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
     };
 
     let mouse = { x: null, y: null };
     let smoothMouse = { x: 0, y: 0, active: false };
 
     const handleMouseMove = (event) => {
-      mouse.x = event.x;
-      mouse.y = event.y;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = event.clientX - rect.left;
+      mouse.y = event.clientY - rect.top;
       smoothMouse.active = true;
     };
 
@@ -44,12 +49,10 @@ const GridBackground = () => {
       const gridSize = GRID_CONFIG.gridSize;
       const offset = (t * GRID_CONFIG.speed) % gridSize;
 
-      // Vertical lines
       for (let x = offset; x < canvas.width; x += gridSize) {
         ctx.beginPath();
         for (let y = 0; y < canvas.height; y += 10) {
           let drawX = x;
-          let drawY = y;
 
           if (GRID_CONFIG.interactive && smoothMouse.active) {
             const dx = smoothMouse.x - x;
@@ -57,23 +60,20 @@ const GridBackground = () => {
             const distance = Math.sqrt(dx * dx + dy * dy);
             if (distance < GRID_CONFIG.mouseRadius) {
               const force = (GRID_CONFIG.mouseRadius - distance) / GRID_CONFIG.mouseRadius;
-              // Smoother force curve
               const smoothForce = Math.pow(force, 2);
               drawX -= dx * smoothForce * GRID_CONFIG.distortionStrength;
             }
           }
           
-          if (y === 0) ctx.moveTo(drawX, drawY);
-          else ctx.lineTo(drawX, drawY);
+          if (y === 0) ctx.moveTo(drawX, y);
+          else ctx.lineTo(drawX, y);
         }
         ctx.stroke();
       }
 
-      // Horizontal lines
       for (let y = offset; y < canvas.height; y += gridSize) {
         ctx.beginPath();
         for (let x = 0; x < canvas.width; x += 10) {
-          let drawX = x;
           let drawY = y;
 
           if (GRID_CONFIG.interactive && smoothMouse.active) {
@@ -87,20 +87,18 @@ const GridBackground = () => {
             }
           }
           
-          if (x === 0) ctx.moveTo(drawX, drawY);
-          else ctx.lineTo(drawX, drawY);
+          if (x === 0) ctx.moveTo(x, drawY);
+          else ctx.lineTo(x, drawY);
         }
         ctx.stroke();
       }
     };
 
     const animate = (t) => {
-      // Lerp smooth mouse
       if (mouse.x !== null) {
         smoothMouse.x += (mouse.x - smoothMouse.x) * 0.2;
         smoothMouse.y += (mouse.y - smoothMouse.y) * 0.2;
       } else {
-        // Slowly reset or deactivate
         smoothMouse.active = false;
       }
 
@@ -109,15 +107,20 @@ const GridBackground = () => {
     };
 
     updateCanvasSize();
+    lastWidth = canvas.width;
     animate(0);
 
     const handleResize = () => {
+      const prevWidth = lastWidth;
       updateCanvasSize();
+      lastWidth = canvas.width;
     };
 
     window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseout", handleMouseLeave);
+    if (!isMobile) {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseout", handleMouseLeave);
+    }
 
     return () => {
       window.removeEventListener("resize", handleResize);

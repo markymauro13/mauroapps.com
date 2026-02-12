@@ -9,28 +9,32 @@ const LinesBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const parent = canvas.parentElement;
 
     const ctx = canvas.getContext("2d");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
     let animationFrameId;
+    let lastWidth = 0;
 
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const rect = parent.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
     };
 
     let mouse = { x: null, y: null };
     let smoothMouse = { x: 0, y: 0, active: false };
 
     const handleMouseMove = (event) => {
-      mouse.x = event.x;
-      mouse.y = event.y;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = event.clientX - rect.left;
+      mouse.y = event.clientY - rect.top;
       smoothMouse.active = true;
     };
 
     const handleMouseLeave = () => {
       mouse.x = null;
       mouse.y = null;
-      // We don't set smoothMouse.active to false immediately to allow momentum to fade
     };
 
     class Particle {
@@ -43,7 +47,6 @@ const LinesBackground = () => {
       }
 
       update() {
-        // Mouse interaction (Smoother with momentum)
         if (LINES_CONFIG.interactive && smoothMouse.active) {
           const dx = smoothMouse.x - this.x;
           const dy = smoothMouse.y - this.y;
@@ -59,8 +62,7 @@ const LinesBackground = () => {
           }
         }
 
-        // Relaxed physics
-        this.vx *= 0.99; // Lower friction for smoother drift
+        this.vx *= 0.99;
         this.vy *= 0.99;
 
         const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
@@ -73,7 +75,6 @@ const LinesBackground = () => {
         this.x += this.vx;
         this.y += this.vy;
 
-        // Screen boundary
         if (this.x < 0) { this.x = 0; this.vx *= -0.5; }
         else if (this.x > canvas.width) { this.x = canvas.width; this.vx *= -0.5; }
         if (this.y < 0) { this.y = 0; this.vy *= -0.5; }
@@ -91,8 +92,7 @@ const LinesBackground = () => {
     let particles = [];
     const init = () => {
       particles = [];
-      const count = LINES_CONFIG.particleCount;
-      for (let i = 0; i < count; i++) {
+      for (let i = 0; i < LINES_CONFIG.particleCount; i++) {
         particles.push(new Particle());
       }
     };
@@ -120,14 +120,11 @@ const LinesBackground = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Lerp smooth mouse
       if (mouse.x !== null) {
         smoothMouse.x += (mouse.x - smoothMouse.x) * 0.2;
         smoothMouse.y += (mouse.y - smoothMouse.y) * 0.2;
       } else {
-        // Slowly drift toward center or offscreen when not active, but we'll just let it stay 
-        // until momentum fades or set active to false if far enough
-        smoothMouse.active = false; // Just disable for now, the particles have their own vx
+        smoothMouse.active = false;
       }
       
       particles.forEach(p => {
@@ -141,17 +138,24 @@ const LinesBackground = () => {
     };
 
     updateCanvasSize();
+    lastWidth = canvas.width;
     init();
     animate();
 
     const handleResize = () => {
+      const prevWidth = lastWidth;
       updateCanvasSize();
-      init();
+      lastWidth = canvas.width;
+      if (Math.abs(canvas.width - prevWidth) > 100) {
+        init();
+      }
     };
 
     window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseout", handleMouseLeave);
+    if (!isMobile) {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseout", handleMouseLeave);
+    }
 
     return () => {
       window.removeEventListener("resize", handleResize);

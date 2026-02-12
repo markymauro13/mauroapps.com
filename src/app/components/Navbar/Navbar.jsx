@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Container, Nav, Navbar as NavbarBS } from "react-bootstrap";
@@ -10,12 +10,12 @@ import "./Navbar.css";
 export default function Navbar() {
   const pathname = usePathname();
   const [hash, setHash] = useState("");
+  const [expanded, setExpanded] = useState(false);
+  const navRef = useRef(null);
 
   useEffect(() => {
-    // Set initial hash
     setHash(window.location.hash);
 
-    // Update hash on change
     const handleHashChange = () => {
       setHash(window.location.hash);
     };
@@ -24,10 +24,27 @@ export default function Navbar() {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  // Update hash when pathname changes (e.g. navigation to a new page clears hash)
   useEffect(() => {
     setHash(window.location.hash);
   }, [pathname]);
+
+  // Close navbar when tapping outside on mobile
+  useEffect(() => {
+    if (!expanded) return;
+
+    const handleOutsideClick = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setExpanded(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
+  }, [expanded]);
 
   const isActive = (path) => {
     if (path === '/') return pathname === '/' && hash === '';
@@ -37,10 +54,11 @@ export default function Navbar() {
 
   const handleLinkClick = (h) => {
     setHash(h);
+    setExpanded(false);
   };
 
   return (
-    <NavbarBS expand="lg" className="navbar-light">
+    <NavbarBS ref={navRef} expand="lg" className="navbar-light" expanded={expanded} onToggle={setExpanded}>
       <Container fluid>
         <Link href="/" className="navbar-brand" passHref onClick={() => handleLinkClick("")}>
           <img 

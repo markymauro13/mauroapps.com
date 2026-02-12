@@ -1,28 +1,25 @@
-// components/ScrollHandler.js
-"use client"; // This component uses client-side hooks and browser APIs
+"use client";
 
-import { usePathname } from "next/navigation"; // To detect route changes
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
+const NAVBAR_OFFSET = 80;
+
 export default function ScrollHandler() {
-  const pathname = usePathname(); // Get the current path
+  const pathname = usePathname();
 
   useEffect(() => {
-    // window.location.hash provides the current hash
     const hash = window.location.hash;
     if (hash) {
       const element = document.getElementById(hash.substring(1));
       if (element) {
-        // Wait a tick for the page to potentially render fully before scrolling
         setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth" });
+          const y = element.getBoundingClientRect().top + window.scrollY - NAVBAR_OFFSET;
+          window.scrollTo({ top: y, behavior: "smooth" });
         }, 0);
       }
-    } else {
-      // If no hash, scroll to top on navigation (optional, common behavior)
-      // window.scrollTo({ top: 0, behavior: 'smooth' }); // Uncomment if you want this
     }
-  }, [pathname]); // Re-run this effect when the pathname changes (i.e., navigation)
+  }, [pathname]);
 
-  return null; // This component doesn't render anything
+  return null;
 }
