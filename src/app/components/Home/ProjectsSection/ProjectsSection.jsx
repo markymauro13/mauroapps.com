@@ -16,10 +16,10 @@ export default function ProjectsSection() {
       <div className="projects-container">
         <motion.div
           className="projects-header"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: ANIMATION_EASE }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 1, ease: ANIMATION_EASE }}
         >
           <span className="projects-eyebrow">Our Apps</span>
           <h2 className="projects-title">Designed for Everyone</h2>
@@ -49,10 +49,10 @@ function ProjectCard({ title, description, icon, index, isComingSoon, githubLink
   return (
     <motion.article
       className="project-card"
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.7, ease: ANIMATION_EASE, delay: index * 0.1 }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      transition={{ duration: 0.8, ease: ANIMATION_EASE, delay: index * 0.1 }}
     >
       {icon && (
         <div className="project-card-visual">
