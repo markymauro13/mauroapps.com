@@ -1,28 +1,52 @@
-// components/ScrollHandler.js
-"use client"; // This component uses client-side hooks and browser APIs
+"use client";
 
-import { usePathname } from "next/navigation"; // To detect route changes
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { scrollToElement } from "../utils/scroll";
 
 export default function ScrollHandler() {
-  const pathname = usePathname(); // Get the current path
+  const pathname = usePathname();
 
   useEffect(() => {
-    // window.location.hash provides the current hash
-    const hash = window.location.hash;
-    if (hash) {
-      const element = document.getElementById(hash.substring(1));
-      if (element) {
-        // Wait a tick for the page to potentially render fully before scrolling
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const elementId = hash.substring(1);
         setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth" });
+          scrollToElement(elementId);
         }, 0);
       }
-    } else {
-      // If no hash, scroll to top on navigation (optional, common behavior)
-      // window.scrollTo({ top: 0, behavior: 'smooth' }); // Uncomment if you want this
-    }
-  }, [pathname]); // Re-run this effect when the pathname changes (i.e., navigation)
+    };
 
-  return null; // This component doesn't render anything
+    handleHashScroll();
+
+    // Set --app-height for mobile browsers
+    const setAppHeight = () => {
+      const doc = document.documentElement;
+      doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+    };
+
+    // Initialize
+    setAppHeight();
+
+    // Only update on width changes (orientation change) to avoid toolbar jump
+    let lastWidth = window.innerWidth;
+    const handleResize = () => {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        setAppHeight();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    // Also listen for orientation change specifically
+    window.addEventListener('orientationchange', setAppHeight);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', setAppHeight);
+    };
+  }, [pathname]);
+
+  return null;
 }

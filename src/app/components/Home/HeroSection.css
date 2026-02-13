@@ -3,7 +3,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .hero-section {
-  min-height: 100vh;
+  min-height: var(--app-height, 100svh);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,7 +12,7 @@
   position: relative;
   overflow: hidden;
   padding: var(--space-4xl) var(--space-xl);
-  background: var(--color-white);
+  background: var(--color-bg);
 }
 
 /* Ambient Background Glow */
@@ -105,8 +105,9 @@
   font-size: clamp(52px, 10vw, 96px);
   font-weight: 700;
   letter-spacing: -0.035em;
-  line-height: 1.02;
+  line-height: 1.15;
   color: var(--text-primary);
+  padding-bottom: 2px;
 }
 
 .hero-title-gradient {
@@ -114,14 +115,14 @@
   font-size: clamp(52px, 10vw, 96px);
   font-weight: 700;
   letter-spacing: -0.035em;
-  line-height: 1.02;
+  line-height: 1.15;
   background: linear-gradient(
     135deg,
-    #1D1D1F 0%,
-    #434343 25%,
-    #1D1D1F 50%,
-    #6E6E73 75%,
-    #1D1D1F 100%
+    var(--text-primary) 0%,
+    var(--text-secondary) 25%,
+    var(--text-primary) 50%,
+    var(--text-tertiary) 75%,
+    var(--text-primary) 100%
   );
   background-size: 200% 200%;
   -webkit-background-clip: text;
@@ -197,9 +198,6 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  opacity: 0;
-  animation: fadeIn 1s var(--ease-out-expo) forwards;
-  animation-delay: 1.2s;
 }
 
 .scroll-indicator-text {
@@ -228,7 +226,7 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    min-height: 85vh;
+    min-height: var(--app-height, 85svh);
     padding: var(--space-3xl) var(--space-lg);
   }
   
@@ -260,7 +258,7 @@
 
 @media (max-width: 480px) {
   .hero-section {
-    min-height: 80vh;
+    min-height: var(--app-height, 80svh);
   }
   
   .hero-title-text,

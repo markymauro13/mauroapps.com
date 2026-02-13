@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
+import BackgroundManager from "../../components/BackgroundManager/BackgroundManager";
 import "./AboutSection.css";
 
 export default function AboutSection() {
   return (
     <section className="about-section">
+      <BackgroundManager type="shapes" />
       <Container>
         <motion.div 
           className="about-content"
@@ -30,7 +32,7 @@ export default function AboutSection() {
 
           {/* Lead */}
           <p className="about-lead">
-            Founded in 2025, Mauro Apps is an iOS app studio focused on 
+            Founded in 2025, Mauro Apps is a cross platform app studio focused on 
             creating beautiful, intuitive mobile experiences.
           </p>
 
@@ -57,7 +59,7 @@ export default function AboutSection() {
             <div className="about-value">
               <div className="about-value-icon">⚡</div>
               <h3 className="about-value-title">Native Performance</h3>
-              <p className="about-value-text">Built specifically for iOS</p>
+              <p className="about-value-text">Built for Cross Platform</p>
             </div>
             
             <div className="about-value">

@@ -1,151 +1,117 @@
-import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { projects } from "../../../data/projects";
+import { FaGithub, FaApple, FaGooglePlay } from "react-icons/fa";
+import projects from "../../../data/projects.json";
+import BackgroundManager from "../../BackgroundManager/BackgroundManager";
 import "./ProjectsSection.css";
+
+const ANIMATION_EASE = [0.16, 1, 0.3, 1];
 
 export default function ProjectsSection() {
   const visibleProjects = projects.filter((p) => p.isVisible);
 
   return (
     <section className="projects-section" id="projects">
-      <Container fluid className="px-0">
-        {/* Section Header */}
-        <motion.div 
+      <BackgroundManager type="icons" />
+      <div className="projects-container">
+        <motion.div
           className="projects-header"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 1, ease: ANIMATION_EASE }}
         >
           <span className="projects-eyebrow">Our Apps</span>
-          <h2 className="projects-title">Designed for iOS</h2>
+          <h2 className="projects-title">Designed for Everyone</h2>
           <p className="projects-subtitle">
             Premium mobile applications built with attention to every detail.
             Native performance, beautiful interfaces.
           </p>
         </motion.div>
 
-        {visibleProjects.length > 0 ? (
-          <div className="projects-grid">
-            {visibleProjects.map((project, index) => (
-              <ProjectCard key={index} {...project} index={index} />
-            ))}
-          </div>
-        ) : (
-          <EmptyState />
-        )}
-      </Container>
+        <div className="projects-grid">
+          {visibleProjects.length > 0 ? (
+            visibleProjects.map((project, index) => (
+              <ProjectCard key={project.title} {...project} index={index} />
+            ))
+          ) : (
+            <div className="no-projects">No projects found.</div>
+          )}
+        </div>
+      </div>
     </section>
   );
 }
 
-function ProjectCard({ title, description, link, icon, index }) {
+function ProjectCard({ title, description, icon, index, isComingSoon, githubLink, link, appleLink, googlePlayLink }) {
+  const isInternalIcon = typeof icon === "string" && icon.startsWith("/");
+
   return (
-    <motion.article 
+    <motion.article
       className="project-card"
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ 
-        duration: 0.7, 
-        ease: [0.16, 1, 0.3, 1],
-        delay: index * 0.1 
-      }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      transition={{ duration: 0.8, ease: ANIMATION_EASE, delay: index * 0.1 }}
     >
-      {/* Preview Area */}
-      <div className="project-card-preview">
-        <div className="project-card-icon">
-          {icon || "📱"}
+      {icon && (
+        <div className="project-card-visual">
+          <div className="project-card-icon-container">
+            {isInternalIcon ? (
+              <Image
+                src={icon}
+                alt={title}
+                width={160}
+                height={160}
+                unoptimized
+                style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "22%" }}
+              />
+            ) : (
+              icon
+            )}
+          </div>
         </div>
-      </div>
-      
-      {/* Content */}
+      )}
+
       <div className="project-card-content">
-        <h3 className="project-card-title">{title}</h3>
-        <p className="project-card-description">{description}</p>
-        
-        <a 
-          href={link} 
-          className="project-card-action"
-          target="_blank"
-          rel="noreferrer"
-        >
-          View on App Store
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path 
-              d="M3.33337 8H12.6667M12.6667 8L8.00004 3.33333M12.6667 8L8.00004 12.6667" 
-              stroke="currentColor" 
-              strokeWidth="1.5" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            />
-          </svg>
-        </a>
+        <header className="project-card-header">
+          <h3 className="project-card-title">{title}</h3>
+          {isComingSoon && <span className="coming-soon-tag">Coming Soon</span>}
+        </header>
+
+        {description && <p className="project-card-description">{description}</p>}
+
+        <div className="project-card-actions">
+          <div className="project-store-links">
+            <StoreButton platform="ios" link={appleLink} isActive={!isComingSoon} />
+            <StoreButton platform="android" link={googlePlayLink} isActive={!isComingSoon} />
+          </div>
+
+          {(githubLink || link) && (
+            <a href={githubLink || link} target="_blank" rel="noreferrer" className="btn-github">
+              <FaGithub size={18} />
+              {githubLink ? "View on GitHub" : "View Project"}
+            </a>
+          )}
+        </div>
       </div>
     </motion.article>
   );
 }
 
-function EmptyState() {
+function StoreButton({ platform, link, isActive }) {
+  const Icon = platform === "ios" ? FaApple : FaGooglePlay;
+  const label = platform === "ios" ? "App Store" : "Google Play";
+  const Tag = isActive ? "a" : "div";
+
+  const props = isActive
+    ? { href: link || "#", target: "_blank", rel: "noreferrer", className: "btn-store active" }
+    : { className: "btn-store placeholder" };
+
   return (
-    <motion.div 
-      className="projects-grid"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {/* Coming Soon Card */}
-      <article className="project-card project-card-coming-soon">
-        <div className="project-card-preview">
-          <div className="project-card-icon" style={{ padding: 0, overflow: 'hidden', width: '150px', height: '150px' }}>
-            <Image
-              src="/assets/dearly-logo.png"
-              alt="Dearly"
-              width={100}
-              height={100}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </div>
-        </div>
-        <div className="project-card-content">
-          <a 
-            href="https://github.com/markymauro13/Dearly"
-            target="_blank"
-            rel="noreferrer"
-            className="coming-soon-badge"
-            style={{ textDecoration: 'none', cursor: 'pointer' }}
-          >
-            View on GitHub
-          </a>
-          <h3 className="project-card-title" style={{ marginTop: '12px' }}>
-            Dearly
-          </h3>
-          <p className="project-card-description">
-          A beautiful iOS app for preserving and cherishing greeting cards from loved ones. Scan, store, and relive your special moments forever. 
-          </p>
-        </div>
-      </article>
-      
-      {/* Second Coming Soon Card */}
-      {/* <article className="project-card project-card-coming-soon">
-        <div className="project-card-preview">
-          <div className="project-card-icon">🚀</div>
-        </div>
-        <div className="project-card-content">
-          <span className="coming-soon-badge">
-            <span>In Development</span>
-          </span>
-          <h3 className="project-card-title" style={{ marginTop: '12px' }}>
-            More to Come
-          </h3>
-          <p className="project-card-description">
-            Stay tuned for more innovative iOS applications. Follow us for updates 
-            and be the first to know when we launch.
-          </p>
-        </div>
-      </article> */}
-    </motion.div>
+    <Tag {...props}>
+      <Icon size={platform === "ios" ? 16 : 14} />
+      <span>{label}</span>
+    </Tag>
   );
 }

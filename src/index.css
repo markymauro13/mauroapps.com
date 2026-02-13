@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    MAURO APPS - Apple-Inspired Design System
-   Premium iOS App Studio Aesthetic
+   Premium Cross Platform App Studio Aesthetic
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -13,6 +13,7 @@
   --color-black: #000000;
   --color-bg: #FBFBFD;
   --color-bg-secondary: #F5F5F7;
+  --color-surface: #FFFFFF;
   
   /* Text Colors */
   --text-primary: #1D1D1F;
@@ -22,6 +23,12 @@
   /* Accent - Apple Blue */
   --accent-blue: #0071E3;
   --accent-blue-hover: #0077ED;
+  
+  /* Vibrant Accent Gradients - NEW */
+  --gradient-purple-blue: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-pink-orange: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-green-teal: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-sunset: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
   
   /* Premium Gradients */
   --gradient-text: linear-gradient(90deg, #1D1D1F 0%, #424245 50%, #1D1D1F 100%);
@@ -77,10 +84,58 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   --duration-fast: 0.2s;
   --duration-normal: 0.4s;
   --duration-slow: 0.8s;
   --duration-slower: 1.2s;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Dark Mode Theme - NEW
+   ───────────────────────────────────────────────────────────────────────────── */
+
+[data-theme="dark"] {
+  --color-bg: #000000;
+  --color-bg-secondary: #1C1C1E;
+  --color-white: #1C1C1E;
+  --color-black: #F5F5F7;
+  --color-surface: #1C1C1E;
+  
+  /* Dark Mode Text */
+  --text-primary: #F5F5F7;
+  --text-secondary: #A1A1A6;
+  --text-tertiary: #6E6E73;
+  
+  /* Dark Mode Accent */
+  --accent-blue: #0A84FF;
+  --accent-blue-hover: #409CFF;
+  
+  /* Dark Mode Glass */
+  --glass-bg: rgba(28, 28, 30, 0.72);
+  --glass-bg-heavy: rgba(28, 28, 30, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  
+  /* Dark Mode Shadows - Elevated */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 24px 80px rgba(0, 0, 0, 0.8), 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.5);
+  --shadow-card-hover: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  
+  /* Dark Mode Gradients */
+  --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.25), transparent);
+  --gradient-glow: radial-gradient(circle at 50% 50%, rgba(10, 132, 255, 0.15), transparent 60%);
+  --gradient-text-shimmer: linear-gradient(
+    105deg,
+    #F5F5F7 0%,
+    #F5F5F7 40%,
+    #A1A1A6 50%,
+    #F5F5F7 60%,
+    #F5F5F7 100%
+  );
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -101,6 +156,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  overflow-anchor: auto;
   font-family: var(--font-system);
   font-size: 17px;
   font-weight: 400;
@@ -280,11 +336,11 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 28px;
+  padding: 12px 22px;
   font-family: var(--font-system);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 500;
-  letter-spacing: -0.022em;
+  letter-spacing: -0.01em;
   color: var(--color-white);
   background: var(--color-black);
   border: none;
@@ -296,9 +352,9 @@ body {
 }
 
 .btn-primary:hover {
-  background: #333;
+  background: var(--text-secondary);
   transform: scale(1.02);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   color: var(--color-white);
   text-decoration: none;
 }
@@ -312,14 +368,14 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 28px;
+  padding: 12px 22px;
   font-family: var(--font-system);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 500;
-  letter-spacing: -0.022em;
+  letter-spacing: -0.01em;
   color: var(--accent-blue);
   background: transparent;
-  border: none;
+  border: 1.5px solid rgba(0, 113, 227, 0.3);
   border-radius: var(--radius-pill);
   cursor: pointer;
   text-decoration: none;
@@ -329,7 +385,9 @@ body {
 
 .btn-secondary:hover {
   color: var(--accent-blue-hover);
-  text-decoration: underline;
+  background: rgba(0, 113, 227, 0.06);
+  border-color: rgba(0, 113, 227, 0.5);
+  text-decoration: none;
 }
 
 .btn-outline {
@@ -569,6 +627,140 @@ body {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
+   Advanced Animations - NEW
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-10px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-20px) translateX(-5px);
+  }
+  75% {
+    transform: translateY(-10px) translateX(-10px);
+  }
+}
+
+@keyframes shimmerSkeleton {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes rotateGradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(10, 132, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(10, 132, 255, 0.6);
+  }
+}
+
+/* Animation Classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 10s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Loading Skeleton - NEW
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    var(--color-bg-secondary) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerSkeleton 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+[data-theme="dark"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    var(--color-bg-secondary) 100%
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Theme Transition - NEW
+   ───────────────────────────────────────────────────────────────────────────── */
+
+body {
+  transition: background-color var(--duration-normal) var(--ease-out-expo),
+              color var(--duration-normal) var(--ease-out-expo);
+}
+
+* {
+  transition: background-color var(--duration-normal) var(--ease-out-expo),
+              border-color var(--duration-normal) var(--ease-out-expo),
+              color var(--duration-normal) var(--ease-out-expo);
+}
+
+/* Disable transitions during page load */
+body.loading * {
+  transition: none !important;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   3D Transform Utilities - NEW
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.preserve-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.tilt-3d {
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.tilt-3d:hover {
+  transform: rotateX(2deg) rotateY(2deg) scale(1.02);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
    Responsive Breakpoints
    ───────────────────────────────────────────────────────────────────────────── */
 
@@ -600,5 +792,26 @@ body {
   :root {
     --space-4xl: 3rem;
     --space-5xl: 4rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Reduced Motion Support - Accessibility
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-float,
+  .animate-float-slow,
+  .animate-shimmer,
+  .animate-glow {
+    animation: none !important;
   }
 }

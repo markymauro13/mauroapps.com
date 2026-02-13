@@ -24,8 +24,17 @@
    Hero Styles (shared across pages)
    ───────────────────────────────────────────────────────────────────────────── */
 
+html {
+  transition: background-color var(--duration-normal) var(--ease-out-expo);
+}
+
+body {
+  transition: background-color var(--duration-normal) var(--ease-out-expo),
+              color var(--duration-normal) var(--ease-out-expo);
+}
+
 .hero-wrapper {
-  min-height: 90vh;
+  min-height: calc(var(--app-height, 100svh) * 0.9);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -75,10 +84,10 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   iOS App Badge
+   App Badge
    ───────────────────────────────────────────────────────────────────────────── */
 
-.ios-badge {
+.app-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -92,13 +101,13 @@
   transition: all var(--duration-normal) var(--ease-out-expo);
 }
 
-.ios-badge:hover {
+.app-badge:hover {
   transform: scale(1.05);
   box-shadow: var(--shadow-lg);
   color: var(--color-white);
 }
 
-.ios-badge svg {
+.app-badge svg {
   width: 20px;
   height: 20px;
 }
@@ -148,7 +157,7 @@ a:hover {
 
 @media (max-width: 768px) {
   .hero-wrapper {
-    min-height: 80vh;
+    min-height: calc(var(--app-height, 100svh) * 0.8);
     padding: var(--space-3xl) var(--space-lg);
   }
   
@@ -160,6 +169,6 @@ a:hover {
 
 @media (max-width: 480px) {
   .hero-wrapper {
-    min-height: 70vh;
+    min-height: calc(var(--app-height, 100svh) * 0.7);
   }
 }

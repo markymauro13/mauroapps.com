@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import BackgroundManager from "../BackgroundManager/BackgroundManager";
 import "./HeroSection.css";
 
 export default function HeroSection() {
+  const [scrollOpacity, setScrollOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const newOpacity = Math.max(0, 1 - scrollPosition / 100);
+      setScrollOpacity(newOpacity);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className="hero-section">
-      <div className="hero-background" aria-hidden="true" />
+      <BackgroundManager type="particles" />
       
       <div className="hero-content">
         {/* Eyebrow */}
-        <div className="hero-eyebrow">
+        <div className="hero-eyebrow animate-float">
           <span className="hero-eyebrow-dot" />
-          iOS App Studio
+          Cross Platform App Studio
         </div>
         
         {/* Main Title */}
@@ -22,7 +36,7 @@ export default function HeroSection() {
         
         {/* Subtitle */}
         <p className="hero-subtitle">
-          We design and develop premium iOS applications that users love. 
+          We design and develop premium cross platform applications that users love. 
           Intuitive interfaces, powerful features, seamless experiences.
         </p>
         
@@ -30,8 +44,8 @@ export default function HeroSection() {
         <div className="hero-actions">
           <motion.a
             href="#projects"
-            className="btn-primary"
-            whileHover={{ scale: 1.02 }}
+            className="btn-primary tilt-3d"
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
             View Our Apps
@@ -49,7 +63,7 @@ export default function HeroSection() {
           <motion.a
             href="/contact"
             className="btn-secondary"
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.03, x: 2 }}
             whileTap={{ scale: 0.98 }}
           >
             Get in Touch
@@ -58,10 +72,20 @@ export default function HeroSection() {
       </div>
       
       {/* Scroll Indicator */}
-      <div className="scroll-indicator">
-        <span className="scroll-indicator-text">Scroll</span>
-        <div className="scroll-indicator-line" />
-      </div>
+      <motion.div 
+        className="scroll-indicator"
+        style={{ opacity: scrollOpacity }}
+      >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 1 }}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}
+        >
+          <span className="scroll-indicator-text">Scroll</span>
+          <div className="scroll-indicator-line" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
