@@ -83,8 +83,8 @@ function ProjectCard({ title, description, icon, index, isComingSoon, githubLink
 
         <div className="project-card-actions">
           <div className="project-store-links">
-            <StoreButton platform="ios" link={appleLink} isActive={!isComingSoon} />
-            <StoreButton platform="android" link={googlePlayLink} isActive={!isComingSoon} />
+            <StoreButton platform="ios" link={appleLink} isActive={!isComingSoon && !!appleLink} />
+            <StoreButton platform="android" link={googlePlayLink} isActive={!isComingSoon && !!googlePlayLink} />
           </div>
 
           {(githubLink || link) && (

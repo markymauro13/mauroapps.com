@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap";
 import Image from "next/image";
+import Link from "next/link";
 import "./Footer.css";
 
 export default function Footer() {
@@ -39,8 +40,8 @@ export default function Footer() {
             © {currentYear} Mauro Apps LLC. All rights reserved.
           </p>
           <div className="footer-legal">
-            <a href="#" className="footer-legal-link">Privacy Policy</a>
-            <a href="#" className="footer-legal-link">Terms of Service</a>
+            <Link href="/privacy" className="footer-legal-link">Privacy Policy</Link>
+            <Link href="/terms" className="footer-legal-link">Terms of Service</Link>
           </div>
         </div>
       </Container>
