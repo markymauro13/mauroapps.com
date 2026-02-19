@@ -1,0 +1,61 @@
+/* src/app/privacy/policy.css */
+
+.policy-page {
+  background-color: var(--color-bg);
+  min-height: 80vh;
+  color: var(--text-primary);
+}
+
+.policy-page h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.024em;
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-xs);
+}
+
+.policy-date {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-2xl);
+  display: block;
+}
+
+.policy-page h2 {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+.policy-page section {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.policy-page p, .policy-page li {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.policy-page ul {
+  padding-left: var(--space-xl);
+}
+
+.policy-page section:first-of-type {
+  border-top: 1px solid var(--glass-border);
+  padding-top: var(--space-xl);
+}
+
+[data-theme="dark"] .policy-page {
+  background-color: var(--color-bg);
+}
+
+[data-theme="dark"] .policy-page p, 
+[data-theme="dark"] .policy-page li {
+  color: var(--text-secondary);
+}
