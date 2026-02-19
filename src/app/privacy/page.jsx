@@ -109,21 +109,44 @@ export default function PrivacyPolicy() {
         </section>
 
         <section className="mb-5">
-          <h2>10. Security of Your Information</h2>
+          <h2>10. California Residents (CCPA)</h2>
+          <p>
+            If you are a California resident, the California Consumer Privacy Act (CCPA) provides you with specific rights regarding your personal information:
+          </p>
+          <ul>
+            <li><strong>Right to Know:</strong> You have the right to request that we disclose the categories and specific pieces of personal information we have collected about you, the categories of sources from which that information is collected, the business or commercial purpose for collecting it, and the categories of third parties with whom we share it.</li>
+            <li><strong>Right to Delete:</strong> You have the right to request that we delete the personal information we have collected from you, subject to certain exceptions.</li>
+            <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising any of your CCPA rights. We will not deny you goods or services, charge you different prices, or provide you with a different level of quality.</li>
+            <li><strong>Do Not Sell:</strong> We do not sell personal information as defined by the CCPA.</li>
+          </ul>
+          <p>
+            To exercise your CCPA rights, please contact us at mark@mauroapps.com. We will verify your identity before fulfilling your request and respond within 45 days.
+          </p>
+        </section>
+
+        <section className="mb-5">
+          <h2>11. Security of Your Information</h2>
           <p>
             We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against interception or misuse.
           </p>
         </section>
 
         <section className="mb-5">
-          <h2>11. Changes to This Policy</h2>
+          <h2>12. Accessibility</h2>
+          <p>
+            Mauro Apps LLC is committed to ensuring digital accessibility for people with disabilities. We continually work to improve the user experience for everyone and apply the relevant accessibility standards (WCAG 2.1). If you experience any difficulty accessing any part of our website or applications, please contact us at mark@mauroapps.com, and we will work to provide the information you need.
+          </p>
+        </section>
+
+        <section className="mb-5">
+          <h2>13. Changes to This Policy</h2>
           <p>
             We may update this Privacy Policy from time to time. When we do, we will revise the "Last updated" date at the top of this page. For significant changes, we will provide a more prominent notice, such as an in-app notification or email. We encourage you to review this policy periodically.
           </p>
         </section>
 
         <section className="mb-5">
-          <h2>12. Contact Us</h2>
+          <h2>14. Contact Us</h2>
           <p>
             If you have questions, concerns, or requests regarding this Privacy Policy, please contact us at:<br />
             <strong>Mauro Apps LLC</strong><br />

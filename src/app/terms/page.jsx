@@ -122,7 +122,49 @@ export default function TermsOfService() {
         </section>
 
         <section className="mb-5">
-          <h2>12. Contact Us</h2>
+          <h2>12. Indemnification</h2>
+          <p>
+            You agree to defend, indemnify, and hold harmless Mauro Apps LLC, its officers, directors, employees, agents, licensors, and suppliers from and against any claims, actions, demands, liabilities, and settlements, including without limitation reasonable legal and accounting fees, arising from or related to your violation of these Terms or your use of the Services.
+          </p>
+        </section>
+
+        <section className="mb-5">
+          <h2>13. Force Majeure</h2>
+          <p>
+            Mauro Apps LLC shall not be liable for any failure or delay in performing our obligations under these Terms where such failure or delay results from circumstances beyond our reasonable control, including but not limited to: natural disasters, acts of government, pandemics, power failures, internet or telecommunications outages, or any third-party service provider failures (including Apple, Google, and cloud infrastructure providers).
+          </p>
+        </section>
+
+        <section className="mb-5">
+          <h2>14. Open-Source Software Notices</h2>
+          <p>
+            Our applications may incorporate open-source software components. Each open-source component is subject to its own license terms, which can be found in the application's settings or documentation. Nothing in these Terms limits your rights under, or grants you rights that supersede, the terms of any applicable open-source license.
+          </p>
+        </section>
+
+        <section className="mb-5">
+          <h2>15. Accessibility</h2>
+          <p>
+            Mauro Apps LLC is committed to ensuring digital accessibility. We strive to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 and continuously work to improve the accessibility of our Services. If you encounter an accessibility barrier, please contact us at mark@mauroapps.com.
+          </p>
+        </section>
+
+        <section className="mb-5">
+          <h2>16. Severability</h2>
+          <p>
+            If any provision of these Terms is held by a court of competent jurisdiction to be invalid, illegal, or unenforceable, that provision shall be modified to the minimum extent necessary to make it enforceable, or if modification is not possible, severed from these Terms. The remaining provisions shall continue in full force and effect.
+          </p>
+        </section>
+
+        <section className="mb-5">
+          <h2>17. Entire Agreement</h2>
+          <p>
+            These Terms, together with our Privacy Policy and any other legal notices or agreements published by us on or through the Services, constitute the entire agreement between you and Mauro Apps LLC regarding the use of the Services. These Terms supersede all prior agreements, understandings, and communications between you and us, whether written or oral.
+          </p>
+        </section>
+
+        <section className="mb-5">
+          <h2>18. Contact Us</h2>
           <p>
             If you have any questions about these Terms, please contact us at:<br />
             <strong>Mauro Apps LLC</strong><br />
