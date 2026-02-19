@@ -66,7 +66,7 @@ export default function TermsOfService() {
           <p>By using the Services, you represent and warrant that:</p>
           <ul>
             <li>You have the legal capacity to enter into these Terms.</li>
-            <li>You are at least 13 years of age; if under 18, you have verifiable parental or guardian consent.</li>
+            <li>You are at least 18 years of age.</li>
             <li>You will not access the Services through automated or non-human means (bots, scripts, or otherwise).</li>
             <li>You will not use the Services for any illegal or unauthorized purpose.</li>
             <li>Your use of the Services will not violate any applicable law or regulation.</li>

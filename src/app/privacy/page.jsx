@@ -78,9 +78,9 @@ export default function PrivacyPolicy() {
         </section>
 
         <section className="mb-5">
-          <h2>7. Children's Privacy (COPPA)</h2>
+          <h2>7. Age Restrictions</h2>
           <p>
-            Our Services are not directed to children under the age of 13, and we do not knowingly collect personal information from children under 13. If we learn that we have collected personal information from a child under 13 without parental consent, we will delete that information promptly. If you believe we may have collected information from a child under 13, please contact us at mark@mauroapps.com.
+            Our Services are intended for users who are at least 18 years old. We do not knowingly collect personal information from individuals under the age of 18. If we become aware that we have collected personal information from an individual under 18, we will take steps to delete such information. If you become aware that a child has provided us with personal information, please contact us at mark@mauroapps.com.
           </p>
         </section>
 
