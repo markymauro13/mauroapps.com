@@ -10,8 +10,8 @@ export default function Footer() {
         <div className="footer-simple">
           <p>© {currentYear} Mauro Apps LLC. All rights reserved.</p>
           <p>
-            <a href="mailto:mark@mauroapps.com">
-              mark@mauroapps.com
+            <a href="mailto:support@mauroapps.com">
+              support@mauroapps.com
             </a>
           </p>
         </div>
