@@ -70,6 +70,8 @@ export default function TermsOfService() {
             <li>You will not access the Services through automated or non-human means (bots, scripts, or otherwise).</li>
             <li>You will not use the Services for any illegal or unauthorized purpose.</li>
             <li>Your use of the Services will not violate any applicable law or regulation.</li>
+            <li>You are not located in a country that is subject to a U.S. Government embargo, or that has been designated by the U.S. Government as a "terrorist supporting" country.</li>
+            <li>You are not listed on any U.S. Government list of prohibited or restricted parties.</li>
           </ul>
         </section>
 
@@ -82,6 +84,7 @@ export default function TermsOfService() {
             <li>Remove, alter, or obscure any proprietary notices or labels on our applications.</li>
             <li>Use the Services to transmit any unsolicited or unauthorized advertising or promotional material.</li>
             <li>Engage in any conduct that restricts or inhibits anyone's use or enjoyment of the Services.</li>
+            <li>Upload or transmit any content that is illegal, abusive, harassing, defamatory, or otherwise objectionable. We maintain a zero-tolerance policy for objectionable content and abusive users.</li>
             <li>Use the Services in a manner inconsistent with Apple's or Google's applicable developer guidelines.</li>
           </ul>
         </section>

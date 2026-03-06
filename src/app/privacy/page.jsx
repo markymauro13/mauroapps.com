@@ -92,7 +92,7 @@ export default function PrivacyPolicy() {
           <ul>
             <li><strong>Access:</strong> The right to request a copy of the personal information we hold about you.</li>
             <li><strong>Correction:</strong> The right to request that we correct inaccurate or incomplete information.</li>
-            <li><strong>Deletion:</strong> The right to request that we delete your personal information ("right to be forgotten").</li>
+            <li><strong>Account and Data Deletion:</strong> You have the right to request the deletion of your account and personal data. You can initiate this deletion directly within our mobile applications via the account settings, or by contacting us at mark@mauroapps.com. Upon request, we will delete your account and associated data, subject to any legal retention requirements.</li>
             <li><strong>Portability:</strong> The right to receive your data in a structured, machine-readable format.</li>
             <li><strong>Opt-Out:</strong> The right to opt out of push notifications at any time through your device settings.</li>
           </ul>
