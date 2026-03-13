@@ -1,9 +1,46 @@
-"use client";
-
 import { Container } from "react-bootstrap";
 import "../privacy/policy.css";
 
-export default function DearlyPrivacyPolicy() {
+export const metadata = {
+  title: "Dearly Privacy Policy",
+  description: "Privacy Policy for the Dearly app. Learn how we handle your photos, scans, and personal data.",
+  alternates: {
+    canonical: "/privacy-dearly",
+  },
+};
+
+export default function DearlyPrivacyPolicyPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://mauroapps.com"
+      },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Dearly Privacy Policy",
+        "item": "https://mauroapps.com/privacy-dearly"
+      }
+    ]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <DearlyPrivacyPolicy />
+    </>
+  );
+}
+
+function DearlyPrivacyPolicy() {
   return (
     <div className="policy-page">
       <Container className="py-5">

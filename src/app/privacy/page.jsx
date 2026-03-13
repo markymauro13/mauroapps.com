@@ -4,10 +4,40 @@ import "./policy.css";
 export const metadata = {
   title: "Privacy Policy",
   description: "Privacy Policy for Mauro Apps. Learn how we collect, use, and protect your personal information.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 export default function PrivacyPolicyPage() {
-  return <PrivacyPolicy />;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://mauroapps.com"
+      },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Privacy Policy",
+        "item": "https://mauroapps.com/privacy"
+      }
+    ]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PrivacyPolicy />
+    </>
+  );
 }
 
 function PrivacyPolicy() {

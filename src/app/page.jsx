@@ -8,6 +8,9 @@ export const metadata = {
     title: "Mauro Apps — Beautiful Apps, Thoughtfully Crafted",
     description: "Cross Platform App Studio specialized in building premium mobile applications.",
   },
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function HomePage() {

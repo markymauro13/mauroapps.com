@@ -63,6 +63,9 @@ export const metadata = {
     shortcut: "/favicon.ico",
     apple: "/assets/logo.png",
   },
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export const viewport = {
