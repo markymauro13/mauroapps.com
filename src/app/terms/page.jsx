@@ -1,9 +1,46 @@
-"use client";
-
 import { Container } from "react-bootstrap";
 import "../privacy/policy.css";
 
-export default function TermsOfService() {
+export const metadata = {
+  title: "Terms of Service",
+  description: "Terms of Service for Mauro Apps. Please read these terms carefully before using our services.",
+  alternates: {
+    canonical: "/terms",
+  },
+};
+
+export default function TermsOfServicePage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://mauroapps.com"
+      },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Terms of Service",
+        "item": "https://mauroapps.com/terms"
+      }
+    ]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <TermsOfService />
+    </>
+  );
+}
+
+function TermsOfService() {
   return (
     <div className="policy-page">
       <Container className="py-5">
