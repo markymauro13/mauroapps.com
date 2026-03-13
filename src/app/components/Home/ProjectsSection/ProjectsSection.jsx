@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaGithub, FaApple, FaGooglePlay } from "react-icons/fa";

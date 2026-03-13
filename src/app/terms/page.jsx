@@ -1,9 +1,16 @@
-"use client";
-
 import { Container } from "react-bootstrap";
 import "../privacy/policy.css";
 
-export default function TermsOfService() {
+export const metadata = {
+  title: "Terms of Service",
+  description: "Terms of Service for Mauro Apps. Please read these terms carefully before using our services.",
+};
+
+export default function TermsOfServicePage() {
+  return <TermsOfService />;
+}
+
+function TermsOfService() {
   return (
     <div className="policy-page">
       <Container className="py-5">

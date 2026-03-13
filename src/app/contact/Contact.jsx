@@ -1,3 +1,5 @@
+"use client";
+
 import { Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import BackgroundManager from "../components/BackgroundManager/BackgroundManager";

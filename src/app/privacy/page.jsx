@@ -1,9 +1,16 @@
-"use client";
-
 import { Container } from "react-bootstrap";
 import "./policy.css";
 
-export default function PrivacyPolicy() {
+export const metadata = {
+  title: "Privacy Policy",
+  description: "Privacy Policy for Mauro Apps. Learn how we collect, use, and protect your personal information.",
+};
+
+export default function PrivacyPolicyPage() {
+  return <PrivacyPolicy />;
+}
+
+function PrivacyPolicy() {
   return (
     <div className="policy-page">
       <Container className="py-5">
