@@ -22,8 +22,8 @@ export default function Footer() {
               />
             </div>
             <div className="footer-info">
-              <h3 className="footer-brand-name">Mauro Apps</h3>
-              <p className="footer-tagline">Crafting digital excellence.</p>
+              <h3 className="footer-brand-name">Mauro Apps LLC</h3>
+              <p className="footer-tagline">Creating software for everyone.</p>
             </div>
           </div>
           

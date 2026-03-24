@@ -89,12 +89,12 @@ function ProjectCard({ title, description, icon, index, isComingSoon, githubLink
             <StoreButton platform="android" link={googlePlayLink} isActive={!isComingSoon && !!googlePlayLink} />
           </div>
 
-          {(githubLink || link) && (
+          {/* {(githubLink || link) && (
             <a href={githubLink || link} target="_blank" rel="noreferrer" className="btn-github">
               <FaGithub size={18} />
               {githubLink ? "View on GitHub" : "View Project"}
             </a>
-          )}
+          )} */}
         </div>
       </div>
     </motion.article>
@@ -104,16 +104,20 @@ function ProjectCard({ title, description, icon, index, isComingSoon, githubLink
 function StoreButton({ platform, link, isActive }) {
   const Icon = platform === "ios" ? FaApple : FaGooglePlay;
   const label = platform === "ios" ? "App Store" : "Google Play";
+  const sublabel = platform === "ios" ? "Download on the" : "Get it on";
   const Tag = isActive ? "a" : "div";
 
   const props = isActive
-    ? { href: link || "#", target: "_blank", rel: "noreferrer", className: "btn-store active" }
-    : { className: "btn-store placeholder" };
+    ? { href: link || "#", target: "_blank", rel: "noreferrer", className: `btn-store btn-store--${platform} active` }
+    : { className: `btn-store btn-store--${platform} placeholder` };
 
   return (
     <Tag {...props}>
-      <Icon size={platform === "ios" ? 16 : 14} />
-      <span>{label}</span>
+      <Icon className="btn-store-icon" />
+      <div className="btn-store-text">
+        <span className="btn-store-sublabel">{sublabel}</span>
+        <span className="btn-store-label">{label}</span>
+      </div>
     </Tag>
   );
 }

@@ -161,41 +161,101 @@
 .project-store-links {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 10px;
 }
 
 .btn-store {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-secondary);
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: #fff;
   text-decoration: none;
   transition: all 0.3s var(--ease-out-expo);
 }
 
-.btn-store.active:hover {
-  background: var(--color-white);
-  border-color: var(--accent-blue);
-  color: var(--accent-blue);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+/* App Store — Apple blue */
+.btn-store--ios {
+  background: rgba(0, 113, 227, 0.06);
+  border-color: #0071e3;
+  color: #0071e3;
+}
+
+.btn-store--ios.active:hover {
+  background: rgba(0, 113, 227, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 113, 227, 0.15);
+}
+
+/* Google Play — Google green */
+.btn-store--android {
+  background: rgba(1, 135, 95, 0.06);
+  border-color: #01875f;
+  color: #01875f;
+}
+
+.btn-store--android.active:hover {
+  background: rgba(1, 135, 95, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(1, 135, 95, 0.15);
+}
+
+.btn-store-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.btn-store--ios .btn-store-icon {
+  font-size: 28px;
+}
+
+.btn-store-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.btn-store-sublabel {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+}
+
+.btn-store-label {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .btn-store.placeholder {
   cursor: default;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
-[data-theme="dark"] .btn-store {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.06);
+/* Dark mode adjustments */
+[data-theme="dark"] .btn-store--ios {
+  background: rgba(0, 113, 227, 0.08);
+  border-color: rgba(0, 113, 227, 0.7);
+  color: #3395ff;
+}
+
+[data-theme="dark"] .btn-store--ios.active:hover {
+  background: rgba(0, 113, 227, 0.18);
+  box-shadow: 0 6px 20px rgba(0, 113, 227, 0.25);
+}
+
+[data-theme="dark"] .btn-store--android {
+  background: rgba(1, 135, 95, 0.08);
+  border-color: rgba(1, 135, 95, 0.7);
+  color: #2ac08e;
+}
+
+[data-theme="dark"] .btn-store--android.active:hover {
+  background: rgba(1, 135, 95, 0.18);
+  box-shadow: 0 6px 20px rgba(1, 135, 95, 0.25);
 }
 
 /* GitHub Button */
@@ -283,5 +343,9 @@
 
   .project-store-links {
     grid-template-columns: 1fr;
+  }
+
+  .btn-store {
+    justify-content: center;
   }
 }
