@@ -19,10 +19,10 @@
     "title": "Dearly",
     "description": "A beautiful app for preserving and cherishing greeting cards from loved ones. Scan, store, and relive your special moments forever.",
     "link": "https://github.com/markymauro13/Dearly",
-    "appleLink": "",
-    "googlePlayLink": "",
+    "appleLink": "https://apps.apple.com/us/app/dearly-card-saver-scanner/id6758024427",
+    "googlePlayLink": "https://play.google.com/store/apps/details?id=com.mauroappsllc.dearly&hl=en_US",
     "isVisible": true,
-    "isComingSoon": true,
+    "isComingSoon": false,
     "icon": "/assets/dearly-icon.png",
     "githubLink": "https://github.com/markymauro13/Dearly"
   }

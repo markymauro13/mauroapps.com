@@ -10,11 +10,66 @@ import Navbar from "./components/Navbar/Navbar";
 import ScrollHandler from "./components/ScrollHandler";
 
 export const metadata = {
-  title: "Mauro Apps — App Studio",
+  metadataBase: new URL("https://mauroapps.com"),
+  title: {
+    default: "Mauro Apps — App Studio",
+    template: "%s | Mauro Apps",
+  },
   description: "Premium mobile applications crafted with care. Beautiful interfaces, native performance, thoughtful details.",
+  keywords: ["Mobile Apps", "App Studio", "iOS Development", "Android Development", "UI/UX Design", "Cross-Platform Apps"],
+  authors: [{ name: "Mauro Apps" }],
+  creator: "Mauro Apps",
+  publisher: "Mauro Apps",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    title: "Mauro Apps — App Studio",
+    description: "Premium mobile applications crafted with care. Beautiful interfaces, native performance, thoughtful details.",
+    url: "https://mauroapps.com",
+    siteName: "Mauro Apps",
+    images: [
+      {
+        url: "/assets/logo.png",
+        width: 800,
+        height: 600,
+        alt: "Mauro Apps Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mauro Apps — App Studio",
+    description: "Premium mobile applications crafted with care. Beautiful interfaces, native performance, thoughtful details.",
+    images: ["/assets/logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/assets/logo.png",
+  },
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export const viewport = {
+  themeColor: "#0a0a0a",
   width: "device-width",
   initialScale: 1,
   interactiveWidget: "resizes-visual",
